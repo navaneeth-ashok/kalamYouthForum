@@ -1,0 +1,64 @@
+﻿@model KalamYouthForumWebApp.Models.ViewModels.ProjectImages
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<link rel="stylesheet" href="~/assets/textEditor/jquery-te-1.4.0.css" />
+
+
+<h1>Edit</h1>
+
+<h4>Project</h4>
+<hr />
+<div class="row">
+    <div class="col">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="@Model.Project.ProjectIDKey" />
+            <div class="form-group">
+                <label asp-for="@Model.Project.Heading" class="control-label"></label>
+                <input asp-for="@Model.Project.Heading" class="form-control" />
+                <span asp-validation-for="@Model.Project.Heading" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Project.Content" class="control-label"></label>
+                <textarea asp-for="@Model.Project.Content" class="form-control" rows="10"></textarea>
+                <span asp-validation-for="@Model.Project.Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Project.FilePath" class="control-label"></label>
+                <input asp-for="@Model.Project.FilePath" class="form-control" />
+                <span asp-validation-for="@Model.Project.FilePath" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary mt-3" />
+            </div>
+        </form>
+
+        @if (@Model.RelatedProjectImages.Count() > 0)
+        {
+    <div class="mt-3 mb-3">
+        @foreach (var imageObj in Model.RelatedProjectImages)
+        {
+            <img src=@imageObj.ImageDataURL width="200" />
+            <a asp-action="Delete" asp-controller="Images" asp-route-id="@imageObj.Id" class="text-danger">[x]</a>
+        }
+    </div>
+        }
+
+        <div class="mt-5 mb-5">
+            <h3>Upload Images</h3>
+            <partial name="../Images/UploadImage.cshtml" />
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<script src="~/assets/textEditor/jquery-te-1.4.0.min.js"></script>
+<script>
+    $("#Project_Content").jqte();
+</script>

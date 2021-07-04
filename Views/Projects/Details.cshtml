@@ -1,0 +1,42 @@
+﻿@model KalamYouthForumWebApp.Models.ViewModels.ProjectImages
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Project</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Project.Heading)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Project.Heading)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Project.Content)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.Raw(@Model.Project.Content)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Project.FilePath)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Project.FilePath)
+        </dd>
+    </dl>
+</div>
+<div>
+    @foreach (var imageObj in Model.RelatedProjectImages)    {
+        <img src=@imageObj.ImageDataURL width="400" />
+    }
+    
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Project.ProjectIDKey">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

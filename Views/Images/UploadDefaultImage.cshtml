@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "Upload Default Image";
+}
+
+<h1>Upload Default Image</h1>
+
+<form asp-action="UploadDefaultImageDB"
+      asp-controller="Images"
+      method="post"
+      enctype="multipart/form-data">
+    <input type="file" id="file1"
+           name="file1"
+           multiple="multiple" class="btn btn-info" />
+    <button type="submit" class="btn btn-primary">Upload File(s)</button>
+
+</form>

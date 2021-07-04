@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <partial name="Carousel.cshtml" />
+    <partial name="About.cshtml" />
+    @await Component.InvokeAsync("ProjectList")
+    <partial name="Contact.cshtml" />
+</div>

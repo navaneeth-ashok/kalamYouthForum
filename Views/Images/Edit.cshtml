@@ -1,0 +1,47 @@
+﻿@model KalamYouthForumWebApp.Models.Image
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Image @Model.Id</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="ImageTitle" class="control-label"></label>
+                <input asp-for="ImageTitle" class="form-control" />
+                <span asp-validation-for="ImageTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageData" class="control-label" hidden></label>
+                <input asp-for="ImageData" class="form-control" hidden />
+                <span asp-validation-for="ImageData" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageDataURL" class="control-label" hidden></label>
+                <input asp-for="ImageDataURL" class="form-control" hidden />
+                <span asp-validation-for="ImageDataURL" class="text-danger"></span>
+            </div>
+            <dt class="col-sm-2">
+                @Html.Encode("Preview")
+            </dt>
+            <dd class="col-sm-10">
+                <img src="@Model.ImageDataURL" width="600" />
+            </dd>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

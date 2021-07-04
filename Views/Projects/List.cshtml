@@ -1,0 +1,28 @@
+﻿@model IEnumerable<KalamYouthForumWebApp.Models.ViewModels.ProjectImages>
+@{
+    ViewData["Title"] = "Projects";
+}
+
+<h1>Projects</h1>
+
+<div class="container-fluid container-scroll">
+    <div class="row">
+        @foreach (var projects in Model)
+        {
+        <div class="col">
+            <h2>@projects.Project.Heading</h2>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <img src="@projects.RelatedProjectImages.ToList()[0].ImageDataURL" width="300" />
+                    </div>
+                    <div class="col project-info">
+                        <p><a asp-controller="Projects" asp-action="View" asp-route-id="@projects.Project.ProjectIDKey">Read More</a></p>
+                        <div>@Html.Raw(projects.Project.Content)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
