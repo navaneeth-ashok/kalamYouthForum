@@ -1,4 +1,4 @@
-﻿@model KalamYouthForumWebApp.Models.ViewModels.RoleViewModel
+﻿@model KalamYouthForumWebApp.Models.ViewModels.RoleUserListViewModel
 
 @{
     ViewData["Title"] = "Role List";
@@ -10,10 +10,35 @@
     <h4>@Html.DisplayFor(model => model.RoleName)</h4>
     <hr />
     <div class="container">
-        <p>Members belonging to this role</p>
+        @{
+            if (Model.Users == null)
+            {
+                <p>No users associated with this role</p>
+            }
+            else
+            {
+                <p>Members belonging to this role</p>
+                <ul>
+                    @{ foreach (var user in Model.Users)
+                        {
+                            <li>
+                                @user.UserName
+                            <ul>
+                                <li>Email : @user.Email</li>
+                                <li>PhoneNumber : @user.PhoneNumber</li>
+                            </ul>
+                        </li>
+                    }
+                    }
+                </ul>
+            }
+        }
+
+
     </div>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    @*<a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |*@
+    <a asp-action="EditUsersInRole" asp-controller="Administration" asp-route-roleId="@Model.Id" class="btn btn-primary">Add or Remove Users</a>
+    <a asp-action="Index" class="btn btn-info">Back to List</a>
 </div>
