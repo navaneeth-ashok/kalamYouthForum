@@ -454,3 +454,12 @@ C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Vie
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\Projects\ListProjects.cshtml.g.cs
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\Images\UploadDefaultImage.cshtml.g.cs
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\Images\Edit.cshtml.g.cs
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\Index.cshtml.g.cs
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml.g.cs
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\_ViewImports.cshtml.g.cs
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\_ViewImports.cshtml.g.cs
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\Administration\CreateRole.cshtml.g.cs
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\Administration\Index.cshtml.g.cs
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\Administration\Details.cshtml.g.cs

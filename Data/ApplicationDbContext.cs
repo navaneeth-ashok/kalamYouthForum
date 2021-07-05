@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using KalamYouthForumWebApp.Models;
+using KalamYouthForumWebApp.Models.ViewModels;
 
 namespace KalamYouthForumWebApp.Data
 {
@@ -19,6 +20,9 @@ namespace KalamYouthForumWebApp.Data
         
         // add images to DB
         public DbSet<Image> Images { get; set; }
+        
+        // add images to DB
+        public DbSet<KalamYouthForumWebApp.Models.ViewModels.RoleViewModel> RoleViewModel { get; set; }
     }
 
 }

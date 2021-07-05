@@ -1,0 +1,19 @@
+﻿@model KalamYouthForumWebApp.Models.ViewModels.RoleViewModel
+
+@{
+    ViewData["Title"] = "Role List";
+}
+
+<h1>Details of roles and associated members</h1>
+
+<div>
+    <h4>@Html.DisplayFor(model => model.RoleName)</h4>
+    <hr />
+    <div class="container">
+        <p>Members belonging to this role</p>
+    </div>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
