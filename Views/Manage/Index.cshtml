@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewData["Title"] = "Management";
+}
+
+<h1 class="pt-4 pb-4">Management</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card rounded shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Chapter Management</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Add/Remove/View chapters and associated SHEs</h6>
+                    <p class="card-text">Use this card for accessing the details related to chapters and from that view, access the SHEs</p>
+                    <a asp-action="Index" asp-controller="ChapterModels" class="card-link btn btn-primary">Manage</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card rounded shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">SHE Management</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Add/Remove/View SHEs</h6>
+                    <p class="card-text">Use this card for accessing the details related to SHEs</p>
+                    <a asp-action="Index" asp-controller="SHE" class="card-link btn btn-primary">Manage</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card rounded shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Project Management</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Add/Remove/View projects</h6>
+                    <p class="card-text">Use this card for accessing the project write-ups, image uploads etc</p>
+                    <a asp-action="Index" asp-controller="Projects" class="card-link btn btn-primary">Manage</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card rounded shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Images Management</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Add/Remove/View images</h6>
+                    <p class="card-text">Use this card for viewing images added to the project write-ups.</p>
+                    <p class="card-text">It's not recommended to delete images using this page, please delete images from the project detail page.</p>
+                    <a asp-action="Index" asp-controller="Images" class="card-link btn btn-primary">Manage</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card rounded shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">User Management</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Add/Remove/Assign User roles</h6>
+                    <p class="card-text">Use this card to change the user roles of the registered users, according to their user access permission level.</p>
+                    <a asp-action="Index" asp-controller="Administration" class="card-link btn btn-primary">Manage</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

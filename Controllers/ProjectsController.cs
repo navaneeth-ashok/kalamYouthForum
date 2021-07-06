@@ -139,6 +139,7 @@ namespace KalamYouthForumWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                project.DateOfPublish = DateTime.Now;
                 _context.Add(project);
                 await _context.SaveChangesAsync();
                 ImagesController imagesController = new ImagesController(_context);
@@ -182,6 +183,7 @@ namespace KalamYouthForumWebApp.Controllers
             {
                 try
                 {
+                    project.DateOfPublish = DateTime.Now;
                     _context.Update(project);
                     await _context.SaveChangesAsync();
                 }

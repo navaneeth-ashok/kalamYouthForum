@@ -15,6 +15,8 @@ namespace KalamYouthForumWebApp.Models
 
         public string FilePath { get; set; }
 
+        public DateTime DateOfPublish { get; set; }
+
         // a project can contain multiple images
         public ICollection<Image> Images { get; set; }
     }

@@ -1,12 +1,16 @@
 ﻿@model IEnumerable<KalamYouthForumWebApp.Models.ViewModels.ProjectImages>
 
 <div class="container ms-auto me-auto project-list">
+    <div class="input-group mb-3 mt-3">
+        <input type="text" class="form-control" placeholder="Search for Projects...." aria-label="Search for Projects" aria-describedby="button-addon2">
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+    </div>
     <div class="row">
         @foreach (var projects in Model)
         {
             <div class="col-md-6 mt-4 mb-4">
                 <div class="project-card">
-                    <h2>@projects.Project.Heading</h2>
+                    <h2><a asp-controller="Projects" asp-action="View" asp-route-id="@projects.Project.ProjectIDKey">@projects.Project.Heading</a></h2>
                     <div class="container">
                         <div class="row">
                             <div class="col">
@@ -14,6 +18,7 @@
                             </div>
                             <div class="col project-info">
                                 <p><a asp-controller="Projects" asp-action="View" asp-route-id="@projects.Project.ProjectIDKey">Read More</a></p>
+                                <p>@projects.Project.DateOfPublish.ToString("dd/MM/yyyy")</p>
                                 <div>@Html.Raw(projects.Project.Content)</div>
                             </div>
                         </div>

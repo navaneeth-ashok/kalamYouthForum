@@ -13,6 +13,6 @@ namespace KalamYouthForumWebApp.Models.ViewModels
         public string Id { get; set; }
         public string RoleName { get; set; }
 
-        public List<IdentityUser> Users { get; set; }
+        public List<ApplicationUser> Users { get; set; }
     }
 }

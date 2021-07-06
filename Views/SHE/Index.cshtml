@@ -1,53 +1,56 @@
-﻿@model IEnumerable<KalamYouthForumWebApp.Models.SHEModel>
+﻿@model IEnumerable<KalamYouthForumWebApp.Models.ViewModels.SHEChapter>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "SHE Listing";
 }
 
-<h1>Index</h1>
+<h1>SHE Listing Page</h1>
 
-<p>
+@*<p>
     <a asp-action="Create">Create New</a>
-</p>
+</p>*@
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.SHEName)
+                @Html.DisplayNameFor(model => model.SHEModel.SHEName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateOfFormation)
+                @Html.DisplayNameFor(model => model.SHEModel.DateOfFormation)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NumberOfMembers)
+                @Html.DisplayNameFor(model => model.SHEModel.NumberOfMembers)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ElectedPresident)
+                @Html.Encode("Chapter ID")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SHEModel.ElectedPresident)
             </th>
             @*<th>
-                @Html.DisplayNameFor(model => model.PresidentEmail)
-            </th>*@
+            @Html.DisplayNameFor(model => model.PresidentEmail)
+        </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.PresidentPhoneNumber)
+                @Html.DisplayNameFor(model => model.SHEModel.PresidentPhoneNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ElectedSecretary)
-            </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.SecretaryEmail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SecretaryPhoneNumber)
-            </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.ElectedTreasurer)
+                @Html.DisplayNameFor(model => model.SHEModel.ElectedSecretary)
             </th>
             @*<th>
-                @Html.DisplayNameFor(model => model.TreasurerEmail)
-            </th>
+            @Html.DisplayNameFor(model => model.SecretaryEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SecretaryPhoneNumber)
+        </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.TreasurerPhoneNumber)
-            </th>*@
+                @Html.DisplayNameFor(model => model.SHEModel.ElectedTreasurer)
+            </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.TreasurerEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TreasurerPhoneNumber)
+        </th>*@
             <th></th>
         </tr>
     </thead>
@@ -55,25 +58,28 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.SHEName)
+                @Html.DisplayFor(modelItem => item.SHEModel.SHEName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DateOfFormation)
+                @Html.DisplayFor(modelItem => item.SHEModel.DateOfFormation)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NumberOfMembers)
+                @Html.DisplayFor(modelItem => item.SHEModel.NumberOfMembers)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ElectedPresident)
+                @Html.DisplayFor(modelItem => item.Chapter.ChapterID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SHEModel.ElectedPresident)
             </td>
             @*<td>
                 @Html.DisplayFor(modelItem => item.PresidentEmail)
             </td>*@
             <td>
-                @Html.DisplayFor(modelItem => item.PresidentPhoneNumber)
+                @Html.DisplayFor(modelItem => item.SHEModel.PresidentPhoneNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ElectedSecretary)
+                @Html.DisplayFor(modelItem => item.SHEModel.ElectedSecretary)
             </td>
             @*<td>
                 @Html.DisplayFor(modelItem => item.SecretaryEmail)
@@ -82,7 +88,7 @@
                 @Html.DisplayFor(modelItem => item.SecretaryPhoneNumber)
             </td>*@
             <td>
-                @Html.DisplayFor(modelItem => item.ElectedTreasurer)
+                @Html.DisplayFor(modelItem => item.SHEModel.ElectedTreasurer)
             </td>
             @*<td>
                 @Html.DisplayFor(modelItem => item.TreasurerEmail)
@@ -91,9 +97,9 @@
                 @Html.DisplayFor(modelItem => item.TreasurerPhoneNumber)
             </td>*@
             <td>
-                <a asp-action="Edit" asp-route-id="@item.SHEId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.SHEId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.SHEId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.SHEModel.SHEId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SHEModel.SHEId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SHEModel.SHEId">Delete</a>
             </td>
         </tr>
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using KalamYouthForumWebApp.Data;
+using KalamYouthForumWebApp.Models;
 
 namespace KalamYouthForumWebApp.Controllers
 {
@@ -13,9 +14,9 @@ namespace KalamYouthForumWebApp.Controllers
     {
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public AdministrationController(RoleManager<IdentityRole> roleManager, ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public AdministrationController(RoleManager<IdentityRole> roleManager, ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             this.roleManager = roleManager;
             _context = context;
@@ -59,7 +60,7 @@ namespace KalamYouthForumWebApp.Controllers
                 RoleName = role.Name
             };
 
-            var userList = new List<IdentityUser>(); 
+            var userList = new List<ApplicationUser>(); 
 
             foreach(var user in userManager.Users)
             {

@@ -23,16 +23,59 @@ namespace KalamYouthForumWebApp.Controllers
         // GET: SHE
         public async Task<IActionResult> Index()
         {
-            return View(await _context.sheModels.ToListAsync());
+            //var SHEs = await _context.sheModels.ToListAsync();
+            //List<SHEChapter> sheChapters = new List<SHEChapter>();
+            //foreach(var she in SHEs)
+            //{
+            //    ChapterModel SelectedChapter = _context.chapterModels.Include(c => c.SHEModels).Where(b => b.SHEModels;
+
+            //    var model = new SHEChapter
+            //    {
+            //        Chapter = SelectedChapter,
+            //        SHEModel = she
+            //    };
+            //    sheChapters.Add(model);
+            //}
+            ////return View(await _context.sheModels.ToListAsync());
+            //return View(sheChapters);
+            var chapters = await _context.chapterModels.ToListAsync();
+            var shes = await _context.sheModels.ToListAsync();
+            List<SHEChapter> sheChapters = new List<SHEChapter>();
+            foreach (var she in shes)
+            {
+                SHEModel sheModel = _context.sheModels.Include(c => c.ChapterModels).Where(a => a.SHEId == she.SHEId).FirstOrDefault();
+                ChapterModel chapterModel = _context.chapterModels.Include(c => c.SHEModels).Where(a => a.ChapterID == she.ChapterModels.First().ChapterID).FirstOrDefault();
+                var model = new SHEChapter
+                {
+                    Chapter = chapterModel,
+                    SHEModel = she
+                };
+                sheChapters.Add(model);
+            }
+
+            //List<SHEChapter> sheChapters = new List<SHEChapter>();
+            //foreach (var chapter in chapters)
+            //{
+            //    foreach(var she in chapter.SHEModels)
+            //    {
+            //        var model = new SHEChapter
+            //        {
+            //            Chapter = chapter,
+            //            SHEModel = she
+            //        };
+            //        sheChapters.Add(model);
+            //    }
+            //}
+            return View(sheChapters);
         }
 
         public void AssociateSHEToChapter(int chapterID, int sheID)
         {
+            // Adding SHE to Chapter
             ChapterModel SelectedChapter = _context.chapterModels.Include(c => c.SHEModels).Where(a => a.ChapterID == chapterID).FirstOrDefault();
             SHEModel sheModel = _context.sheModels.Find(sheID);
-            //Image SelectedImage = _context.Images.Find(imageID);
-
             SelectedChapter.SHEModels.Add(sheModel);
+
             _context.SaveChanges();
         }
 
@@ -55,10 +98,10 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // GET: SHE/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
 
         [HttpPost]
         public IActionResult Create(int chapterID)

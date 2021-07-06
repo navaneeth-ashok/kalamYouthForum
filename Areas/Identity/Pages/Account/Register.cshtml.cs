@@ -162,6 +162,8 @@ namespace KalamYouthForumWebApp.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    // add the new user to Guest
+                    result = await _userManager.AddToRoleAsync(user, "Guest");
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

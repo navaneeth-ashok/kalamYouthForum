@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<KalamYouthForumWebApp.Models.Project>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Project Listing";
 }
 
-<h1>Index</h1>
+<h1>Project Listing Page</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -31,7 +31,7 @@
                 @Html.DisplayFor(modelItem => item.Heading)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Content)
+                @Html.Raw(item.Content)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FilePath)
