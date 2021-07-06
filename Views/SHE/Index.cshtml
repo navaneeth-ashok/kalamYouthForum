@@ -1,0 +1,101 @@
+﻿@model IEnumerable<KalamYouthForumWebApp.Models.SHEModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SHEName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfFormation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfMembers)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ElectedPresident)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.PresidentEmail)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.PresidentPhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ElectedSecretary)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.SecretaryEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SecretaryPhoneNumber)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.ElectedTreasurer)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.TreasurerEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TreasurerPhoneNumber)
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SHEName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfFormation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfMembers)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElectedPresident)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.PresidentEmail)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.PresidentPhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElectedSecretary)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.SecretaryEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SecretaryPhoneNumber)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.ElectedTreasurer)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.TreasurerEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TreasurerPhoneNumber)
+            </td>*@
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SHEId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SHEId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SHEId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

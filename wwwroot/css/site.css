@@ -12,6 +12,10 @@ a {
   color: #0366d6;
 }
 
+.btn {
+    margin-top: 10px;
+}
+
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
@@ -177,6 +181,12 @@ img.carousel-item{
 .project-info {
     max-height : 300px;
     overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+}
+
+.project-item{
+    height: 100%;
 }
 
 .project-more{
@@ -234,6 +244,7 @@ img.carousel-item{
     background-color: #003844;
     color: #dbdada;
     padding: 10px;
+    height: 100%;
 }
 
 .index-project-card h3{

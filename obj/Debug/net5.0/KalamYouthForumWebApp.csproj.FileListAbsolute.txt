@@ -470,3 +470,8 @@ C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Vie
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\ChapterModels\Details.cshtml.g.cs
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\ChapterModels\Edit.cshtml.g.cs
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\ChapterModels\Index.cshtml.g.cs
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\SHE\Create.cshtml.g.cs
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\SHE\Delete.cshtml.g.cs
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\SHE\Details.cshtml.g.cs
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\SHE\Edit.cshtml.g.cs
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\SHE\Index.cshtml.g.cs

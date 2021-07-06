@@ -156,7 +156,7 @@ namespace KalamYouthForumWebApp.Controllers
                 return NotFound();
             }
             ProjectImages ViewModel = new ProjectImages();
-            var project = _context.Project.Find(id);
+            var project = await _context.Project.FindAsync(id);
             ViewModel.Project = project;
             ViewModel.RelatedProjectImages = _context.Images.Where(i => i.Projects.Any(p => p.ProjectIDKey == id));
             if (project == null)

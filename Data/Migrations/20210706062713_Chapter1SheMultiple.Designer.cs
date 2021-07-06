@@ -4,35 +4,22 @@ using KalamYouthForumWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KalamYouthForumWebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210706062713_Chapter1SheMultiple")]
+    partial class Chapter1SheMultiple
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("ChapterModelSHEModel", b =>
-                {
-                    b.Property<int>("ChapterModelsChapterID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SHEModelsSHEId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ChapterModelsChapterID", "SHEModelsSHEId");
-
-                    b.HasIndex("SHEModelsSHEId");
-
-                    b.ToTable("ChapterModelSHEModel");
-                });
 
             modelBuilder.Entity("ImageProject", b =>
                 {
@@ -221,6 +208,9 @@ namespace KalamYouthForumWebApp.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("ChapterModelsChapterID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DateOfFormation")
                         .HasColumnType("datetime2");
 
@@ -272,6 +262,8 @@ namespace KalamYouthForumWebApp.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SHEId");
+
+                    b.HasIndex("ChapterModelsChapterID");
 
                     b.ToTable("sheModels");
                 });
@@ -425,21 +417,6 @@ namespace KalamYouthForumWebApp.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ChapterModelSHEModel", b =>
-                {
-                    b.HasOne("KalamYouthForumWebApp.Models.ChapterModel", null)
-                        .WithMany()
-                        .HasForeignKey("ChapterModelsChapterID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("KalamYouthForumWebApp.Models.SHEModel", null)
-                        .WithMany()
-                        .HasForeignKey("SHEModelsSHEId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("ImageProject", b =>
                 {
                     b.HasOne("KalamYouthForumWebApp.Models.Image", null)
@@ -453,6 +430,15 @@ namespace KalamYouthForumWebApp.Data.Migrations
                         .HasForeignKey("ProjectsProjectIDKey")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("KalamYouthForumWebApp.Models.SHEModel", b =>
+                {
+                    b.HasOne("KalamYouthForumWebApp.Models.ChapterModel", "ChapterModels")
+                        .WithMany("SHEModels")
+                        .HasForeignKey("ChapterModelsChapterID");
+
+                    b.Navigation("ChapterModels");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -504,6 +490,11 @@ namespace KalamYouthForumWebApp.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("KalamYouthForumWebApp.Models.ChapterModel", b =>
+                {
+                    b.Navigation("SHEModels");
                 });
 #pragma warning restore 612, 618
         }

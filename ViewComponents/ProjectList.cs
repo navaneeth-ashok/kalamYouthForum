@@ -22,7 +22,7 @@ namespace KalamYouthForumWebApp.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             List<ProjectImages> projectImages = new List<ProjectImages>();
-            IEnumerable<Project> projects = _context.Project.ToList().OrderByDescending(p => p.ProjectIDKey).Take(3).ToList();
+            IEnumerable<Project> projects = _context.Project.ToList().OrderByDescending(p => p.ProjectIDKey).Take(2).ToList();
             foreach (var project in projects)
             {
                 ProjectImages ViewModel = new ProjectImages();

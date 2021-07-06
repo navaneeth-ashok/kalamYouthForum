@@ -71,7 +71,7 @@ namespace KalamYouthForumWebApp.Models
         public string TreasurerPhoneNumber { get; set; }
 
         //Binding one SHE to one Chapter
-        public ChapterModel ChapterModels { get; set; }
+        public IEnumerable<ChapterModel> ChapterModels { get; set; }
 
     }
 }

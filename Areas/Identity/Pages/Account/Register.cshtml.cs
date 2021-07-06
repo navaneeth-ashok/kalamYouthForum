@@ -5,28 +5,31 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using KalamYouthForumWebApp.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using KalamYouthForumWebApp.Models;
 
 namespace KalamYouthForumWebApp.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
@@ -52,9 +55,9 @@ namespace KalamYouthForumWebApp.Areas.Identity.Pages.Account
 
 
             [Required]
-            [Timestamp]
+            [DataType(DataType.Date)]
             [Display(Name = "Date of Birth")]
-            public string Dob { get; set; }
+            public DateTime Dob { get; set; }
 
             [Required]
             [StringLength(12, ErrorMessage = "Please add the phone number without country code", MinimumLength = 10)]
@@ -77,14 +80,12 @@ namespace KalamYouthForumWebApp.Areas.Identity.Pages.Account
             public string State { get; set; }
 
             [Required]
-            [StringLength(50, ErrorMessage = "Please select your Gender", MinimumLength = 1)]
             [Display(Name = "Gender")]
-            public string Gender { get; set; }
+            public GenderList Gender { get; set; }
 
             [Required]
-            [StringLength(50, ErrorMessage = "Please select your Blood Group", MinimumLength = 1)]
             [Display(Name = "Blood Group")]
-            public string BloodGroup { get; set; }
+            public BloodGroupList BloodGroup { get; set; }
 
 
             [Required]
@@ -102,7 +103,36 @@ namespace KalamYouthForumWebApp.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
         }
+
+        //public enum GenderList
+        //{
+        //    Male,
+        //    Female,
+        //    Others
+        //}
+
+
+        //public enum BloodGroupList
+        //{
+        //    [Display(Name = "A+")]
+        //    APositive,
+        //    [Display(Name = "A-")]
+        //    ANegative,
+        //    [Display(Name = "B+")]
+        //    BPositive,
+        //    [Display(Name = "B-")]
+        //    BNegative,
+        //    [Display(Name = "O+")]
+        //    OPositive,
+        //    [Display(Name = "O-")]
+        //    ONegative,
+        //    [Display(Name = "AB+")]
+        //    ABPositive,
+        //    [Display(Name = "AB-")]
+        //    ABNegative,
+        //}
 
         public async Task OnGetAsync(string returnUrl = null)
         {
@@ -116,7 +146,19 @@ namespace KalamYouthForumWebApp.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                //var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new ApplicationUser { 
+                    UserName = Input.Email,
+                    Email = Input.Email,
+                    Name = Input.Name,
+                    Dob = Input.Dob,
+                    PhoneNumber = Input.PhoneNumber,
+                    LocalBody = Input.LocalBody,
+                    District = Input.District,
+                    State = Input.State,
+                    Gender = Input.Gender,
+                    BloodGroup = Input.BloodGroup
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

@@ -1,4 +1,4 @@
-﻿@model KalamYouthForumWebApp.Models.ChapterModel
+﻿@model KalamYouthForumWebApp.Models.ViewModels.ChapterSHE
 
 @{
     ViewData["Title"] = "Details";
@@ -11,38 +11,68 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Panchayat)
+            @Html.DisplayNameFor(model => model.Chapter.Panchayat)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Panchayat)
+            @Html.DisplayFor(model => model.Chapter.Panchayat)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Muncipality)
+            @Html.DisplayNameFor(model => model.Chapter.Muncipality)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Muncipality)
+            @Html.DisplayFor(model => model.Chapter.Muncipality)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Taluk)
+            @Html.DisplayNameFor(model => model.Chapter.Taluk)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Taluk)
+            @Html.DisplayFor(model => model.Chapter.Taluk)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Constituency)
+            @Html.DisplayNameFor(model => model.Chapter.Constituency)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Constituency)
+            @Html.DisplayFor(model => model.Chapter.Constituency)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.OfficeAddress)
+            @Html.DisplayNameFor(model => model.Chapter.OfficeAddress)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.OfficeAddress)
+            @Html.DisplayFor(model => model.Chapter.OfficeAddress)
         </dd>
     </dl>
+
 </div>
+<h3>Associated SHEs</h3>
+<form action="/SHE/Create" method="post">
+    <input type="hidden" name="chapterID" value="@Model.Chapter.ChapterID"/>
+    <input type="submit" value="Create new SHE" class="btn btn-primary" />
+</form>
+@*<a asp-action="Create" asp-controller="SHE" asp-route-id="@Model.Chapter.ChapterID" class="btn btn-primary">Create New SHE</a>*@
+<table class="table">
+    <thead>
+        <tr>
+            <th>SHE Name</th>
+            <th>Number of Members</th>
+            <th>President Name</th>
+            <th>President Number</th>
+            <th>President Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var she in Model.SHEModels)
+        {
+            <tr>
+                <td><a asp-action="Details" asp-controller="SHE" asp-route-id="@she.SHEId">@she.SHEName</a></td>
+                <td>@she.NumberOfMembers</td>
+                <td>@she.ElectedPresident</td>
+                <td>@she.PresidentPhoneNumber</td>
+                <td>@she.PresidentEmail</td>   
+            </tr>
+        }
+    </tbody>
+</table>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ChapterID">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Chapter.ChapterID">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

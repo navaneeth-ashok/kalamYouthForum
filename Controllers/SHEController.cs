@@ -11,22 +11,32 @@ using KalamYouthForumWebApp.Models.ViewModels;
 
 namespace KalamYouthForumWebApp.Controllers
 {
-    public class ChapterModelsController : Controller
+    public class SHEController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ChapterModelsController(ApplicationDbContext context)
+        public SHEController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: ChapterModels
+        // GET: SHE
         public async Task<IActionResult> Index()
         {
-            return View(await _context.chapterModels.ToListAsync());
+            return View(await _context.sheModels.ToListAsync());
         }
 
-        // GET: ChapterModels/Details/5
+        public void AssociateSHEToChapter(int chapterID, int sheID)
+        {
+            ChapterModel SelectedChapter = _context.chapterModels.Include(c => c.SHEModels).Where(a => a.ChapterID == chapterID).FirstOrDefault();
+            SHEModel sheModel = _context.sheModels.Find(sheID);
+            //Image SelectedImage = _context.Images.Find(imageID);
+
+            SelectedChapter.SHEModels.Add(sheModel);
+            _context.SaveChanges();
+        }
+
+        // GET: SHE/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,48 +44,48 @@ namespace KalamYouthForumWebApp.Controllers
                 return NotFound();
             }
 
-            var chapterModel = await _context.chapterModels
-                .FirstOrDefaultAsync(m => m.ChapterID == id);
-
-            var sheModels =  _context.sheModels.Where(i => i.ChapterModels.Any(p => p.ChapterID == id));
-
-            var model = new ChapterSHE
-            {
-                Chapter = chapterModel,
-                SHEModels = sheModels
-            };
-
-            if (chapterModel == null)
+            var sHEModel = await _context.sheModels
+                .FirstOrDefaultAsync(m => m.SHEId == id);
+            if (sHEModel == null)
             {
                 return NotFound();
             }
 
-            return View(model);
+            return View(sHEModel);
         }
 
-        // GET: ChapterModels/Create
+        // GET: SHE/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: ChapterModels/Create
+        [HttpPost]
+        public IActionResult Create(int chapterID)
+        {
+            ViewBag.Message = chapterID;
+            return View();
+        }
+
+        // POST: SHE/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ChapterID,Panchayat,Muncipality,Taluk,Constituency,OfficeAddress")] ChapterModel chapterModel)
+        public async Task<IActionResult> CreateSHE([Bind("SHEId,SHEName,DateOfFormation,NumberOfMembers,ElectedPresident,PresidentEmail,PresidentPhoneNumber,ElectedSecretary,SecretaryEmail,SecretaryPhoneNumber,ElectedTreasurer,TreasurerEmail,TreasurerPhoneNumber")] SHEModel sHEModel, int chapterID)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(chapterModel);
+                _context.Add(sHEModel);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                // assigning this SHE to the parent chapter
+                AssociateSHEToChapter(chapterID, sHEModel.SHEId);
+                return RedirectToAction("Details", "ChapterModels", new { id = chapterID });
             }
-            return View(chapterModel);
+            return View(sHEModel);
         }
 
-        // GET: ChapterModels/Edit/5
+        // GET: SHE/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -83,22 +93,22 @@ namespace KalamYouthForumWebApp.Controllers
                 return NotFound();
             }
 
-            var chapterModel = await _context.chapterModels.FindAsync(id);
-            if (chapterModel == null)
+            var sHEModel = await _context.sheModels.FindAsync(id);
+            if (sHEModel == null)
             {
                 return NotFound();
             }
-            return View(chapterModel);
+            return View(sHEModel);
         }
 
-        // POST: ChapterModels/Edit/5
+        // POST: SHE/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ChapterID,Panchayat,Muncipality,Taluk,Constituency,OfficeAddress")] ChapterModel chapterModel)
+        public async Task<IActionResult> Edit(int id, [Bind("SHEId,SHEName,DateOfFormation,NumberOfMembers,ElectedPresident,PresidentEmail,PresidentPhoneNumber,ElectedSecretary,SecretaryEmail,SecretaryPhoneNumber,ElectedTreasurer,TreasurerEmail,TreasurerPhoneNumber")] SHEModel sHEModel)
         {
-            if (id != chapterModel.ChapterID)
+            if (id != sHEModel.SHEId)
             {
                 return NotFound();
             }
@@ -107,12 +117,12 @@ namespace KalamYouthForumWebApp.Controllers
             {
                 try
                 {
-                    _context.Update(chapterModel);
+                    _context.Update(sHEModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ChapterModelExists(chapterModel.ChapterID))
+                    if (!SHEModelExists(sHEModel.SHEId))
                     {
                         return NotFound();
                     }
@@ -123,10 +133,10 @@ namespace KalamYouthForumWebApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(chapterModel);
+            return View(sHEModel);
         }
 
-        // GET: ChapterModels/Delete/5
+        // GET: SHE/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,30 +144,30 @@ namespace KalamYouthForumWebApp.Controllers
                 return NotFound();
             }
 
-            var chapterModel = await _context.chapterModels
-                .FirstOrDefaultAsync(m => m.ChapterID == id);
-            if (chapterModel == null)
+            var sHEModel = await _context.sheModels
+                .FirstOrDefaultAsync(m => m.SHEId == id);
+            if (sHEModel == null)
             {
                 return NotFound();
             }
 
-            return View(chapterModel);
+            return View(sHEModel);
         }
 
-        // POST: ChapterModels/Delete/5
+        // POST: SHE/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var chapterModel = await _context.chapterModels.FindAsync(id);
-            _context.chapterModels.Remove(chapterModel);
+            var sHEModel = await _context.sheModels.FindAsync(id);
+            _context.sheModels.Remove(sHEModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ChapterModelExists(int id)
+        private bool SHEModelExists(int id)
         {
-            return _context.chapterModels.Any(e => e.ChapterID == id);
+            return _context.sheModels.Any(e => e.SHEId == id);
         }
     }
 }

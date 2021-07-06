@@ -1,0 +1,86 @@
+﻿@model KalamYouthForumWebApp.Models.SHEModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>SHEModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="SHEId" />
+            <div class="form-group">
+                <label asp-for="SHEName" class="control-label"></label>
+                <input asp-for="SHEName" class="form-control" />
+                <span asp-validation-for="SHEName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfFormation" class="control-label"></label>
+                <input asp-for="DateOfFormation" class="form-control" />
+                <span asp-validation-for="DateOfFormation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberOfMembers" class="control-label"></label>
+                <input asp-for="NumberOfMembers" class="form-control" />
+                <span asp-validation-for="NumberOfMembers" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ElectedPresident" class="control-label"></label>
+                <input asp-for="ElectedPresident" class="form-control" />
+                <span asp-validation-for="ElectedPresident" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PresidentEmail" class="control-label"></label>
+                <input asp-for="PresidentEmail" class="form-control" />
+                <span asp-validation-for="PresidentEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PresidentPhoneNumber" class="control-label"></label>
+                <input asp-for="PresidentPhoneNumber" class="form-control" />
+                <span asp-validation-for="PresidentPhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ElectedSecretary" class="control-label"></label>
+                <input asp-for="ElectedSecretary" class="form-control" />
+                <span asp-validation-for="ElectedSecretary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SecretaryEmail" class="control-label"></label>
+                <input asp-for="SecretaryEmail" class="form-control" />
+                <span asp-validation-for="SecretaryEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SecretaryPhoneNumber" class="control-label"></label>
+                <input asp-for="SecretaryPhoneNumber" class="form-control" />
+                <span asp-validation-for="SecretaryPhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ElectedTreasurer" class="control-label"></label>
+                <input asp-for="ElectedTreasurer" class="form-control" />
+                <span asp-validation-for="ElectedTreasurer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TreasurerEmail" class="control-label"></label>
+                <input asp-for="TreasurerEmail" class="form-control" />
+                <span asp-validation-for="TreasurerEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TreasurerPhoneNumber" class="control-label"></label>
+                <input asp-for="TreasurerPhoneNumber" class="form-control" />
+                <span asp-validation-for="TreasurerPhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
