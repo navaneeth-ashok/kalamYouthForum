@@ -46,6 +46,48 @@ namespace KalamYouthForumWebApp.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+            [Display(Name = "Name")]
+            public string Name { get; set; }
+
+
+            [Required]
+            [Timestamp]
+            [Display(Name = "Date of Birth")]
+            public string Dob { get; set; }
+
+            [Required]
+            [StringLength(12, ErrorMessage = "Please add the phone number without country code", MinimumLength = 10)]
+            [Display(Name = "Phone Number")]
+            public string PhoneNumber { get; set; }
+
+            [Required]
+            [StringLength(50, ErrorMessage = "Please add the local body name", MinimumLength = 1)]
+            [Display(Name = "Local Body")]
+            public string LocalBody { get; set; }
+            
+            [Required]
+            [StringLength(50, ErrorMessage = "Please add the District name", MinimumLength = 1)]
+            [Display(Name = "District")]
+            public string District { get; set; }
+            
+            [Required]
+            [StringLength(50, ErrorMessage = "Please add the State name", MinimumLength = 1)]
+            [Display(Name = "State")]
+            public string State { get; set; }
+
+            [Required]
+            [StringLength(50, ErrorMessage = "Please select your Gender", MinimumLength = 1)]
+            [Display(Name = "Gender")]
+            public string Gender { get; set; }
+
+            [Required]
+            [StringLength(50, ErrorMessage = "Please select your Blood Group", MinimumLength = 1)]
+            [Display(Name = "Blood Group")]
+            public string BloodGroup { get; set; }
+
+
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }

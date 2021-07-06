@@ -1,0 +1,48 @@
+﻿@model KalamYouthForumWebApp.Models.ChapterModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ChapterModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Panchayat)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Panchayat)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Muncipality)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Muncipality)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Taluk)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Taluk)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Constituency)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Constituency)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OfficeAddress)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OfficeAddress)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ChapterID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

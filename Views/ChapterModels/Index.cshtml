@@ -1,0 +1,65 @@
+﻿@model IEnumerable<KalamYouthForumWebApp.Models.ChapterModel>
+
+@{
+    ViewData["Title"] = "Chapter Management";
+}
+
+<h1>Chapter Management</h1>
+
+<p>
+    <a asp-action="Create">Create new Chapter</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.Encode("Chapter ID")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Panchayat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Muncipality)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Taluk)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Constituency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OfficeAddress)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @("CHPT10" + Html.Encode(item.ChapterID))
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Panchayat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Muncipality)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Taluk)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Constituency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OfficeAddress)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ChapterID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ChapterID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ChapterID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
