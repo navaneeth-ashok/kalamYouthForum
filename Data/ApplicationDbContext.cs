@@ -24,11 +24,14 @@ namespace KalamYouthForumWebApp.Data
         // add Role View Model
         public DbSet<KalamYouthForumWebApp.Models.ViewModels.RoleViewModel> RoleViewModel { get; set; }
 
-        //add SHE Model
+        //add SHG Model
         public DbSet<SHEModel> sheModels {get; set;}
 
         //add chapter Model
         public DbSet<ChapterModel> chapterModels { get; set; }
+
+        //add SHG Member Model
+        public DbSet<SHGMember> shgMembers { get; set; }
 
     }
 

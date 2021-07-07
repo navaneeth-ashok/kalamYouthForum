@@ -128,6 +128,64 @@ namespace KalamYouthForumWebApp.Controllers
             return View(sHEModel);
         }
 
+        [HttpPost]
+        public IActionResult AddMembers(int shgID)
+        {
+            ViewBag.shgID = shgID;
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult ViewSHGMember(int id)
+        {
+            System.Diagnostics.Debug.WriteLine("###############");
+            System.Diagnostics.Debug.WriteLine(id);
+            var model = _context.shgMembers.Find(id);
+            System.Diagnostics.Debug.WriteLine("###############");
+            System.Diagnostics.Debug.WriteLine(model.Name);
+            System.Diagnostics.Debug.WriteLine("###############");
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult ViewAllSHGMembers()
+        {
+            List<SHGMember> shgMembers = new List<SHGMember>();
+            var members = _context.shgMembers.ToList();
+            foreach (var member in members)
+            {
+                shgMembers.Add(member);
+            }
+            return View(shgMembers);
+        }
+
+        [HttpPost]
+        public IActionResult ViewMembers(int shgID)
+        {
+            List<SHGMember> shgMembers = new List<SHGMember>();
+            var members = _context.shgMembers.Where(a => a.SHEId == shgID).ToList();
+            foreach(var member in members)
+            {
+                shgMembers.Add(member);
+            }
+            ViewBag.shgID = shgID;
+            return View(shgMembers);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddMembersToSHG(SHGMember memberModel)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(memberModel);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Details", "SHE", new { id = memberModel.SHEId });
+            }
+            return View(memberModel);
+        }
+
+
         // GET: SHE/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

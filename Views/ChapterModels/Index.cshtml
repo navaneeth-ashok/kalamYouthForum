@@ -37,7 +37,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @("CHPT10" + Html.Encode(item.ChapterID))
+                <a asp-action="Details" asp-route-id="@item.ChapterID">@("CHPT10" + Html.Encode(item.ChapterID))</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Panchayat)

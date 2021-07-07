@@ -11,8 +11,8 @@
             <div class="card rounded shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Chapter Management</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Add/Remove/View chapters and associated SHEs</h6>
-                    <p class="card-text">Use this card for accessing the details related to chapters and from that view, access the SHEs</p>
+                    <h6 class="card-subtitle mb-2 text-muted">Add/Remove/View chapters and associated SHGs</h6>
+                    <p class="card-text">Use this card for accessing the details related to chapters and from that view, access the SHGs</p>
                     <a asp-action="Index" asp-controller="ChapterModels" class="card-link btn btn-primary">Manage</a>
                 </div>
             </div>
@@ -20,9 +20,9 @@
         <div class="col">
             <div class="card rounded shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
                 <div class="card-body">
-                    <h5 class="card-title">SHE Management</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Add/Remove/View SHEs</h6>
-                    <p class="card-text">Use this card for accessing the details related to SHEs</p>
+                    <h5 class="card-title">SHG Management</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Add/Remove/View SHGs</h6>
+                    <p class="card-text">Use this card for accessing the details related to SHGs</p>
                     <a asp-action="Index" asp-controller="SHE" class="card-link btn btn-primary">Manage</a>
                 </div>
             </div>
@@ -55,6 +55,19 @@
                     <h6 class="card-subtitle mb-2 text-muted">Add/Remove/Assign User roles</h6>
                     <p class="card-text">Use this card to change the user roles of the registered users, according to their user access permission level.</p>
                     <a asp-action="Index" asp-controller="Administration" class="card-link btn btn-primary">Manage</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card rounded shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">SHG Member List</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">View all registered SHG members</h6>
+                    <p class="card-text">Use this card to view all the members registered in all the SHGs.</p>
+                    <form action="/SHE/ViewAllSHGMembers" method="post">
+                        <input type="submit" class="card-link btn btn-primary" value="Manage"/>
+                    </form>
+                    @*<a asp-action="Index" asp-controller="Administration" class="card-link btn btn-primary">Manage</a>*@
                 </div>
             </div>
         </div>

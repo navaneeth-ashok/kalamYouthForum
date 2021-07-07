@@ -1,13 +1,12 @@
 ﻿@model KalamYouthForumWebApp.Models.SHEModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "SHG Details";
 }
 
 <h1>Details</h1>
 
 <div>
-    <h4>SHEModel</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -83,6 +82,32 @@
             @Html.DisplayFor(model => model.TreasurerPhoneNumber)
         </dd>
     </dl>
+    <hr/>
+</div>
+<div class="member-list">
+    <h4>List of SHG members</h4>
+    <form asp-action="AddMembers" asp-controller="SHE" method="post">
+        <input type="hidden" name="shgID" value="@Model.SHEId" />
+        <input type="submit" name="submit" class="btn btn-success" value="Add members" />
+    </form>
+    <form asp-action="ViewMembers" asp-controller="SHE" method="post">
+        <input type="hidden" name="shgID" value="@Model.SHEId" />
+        <input type="submit" name="submit" class="btn btn-danger" value="View all members" />
+    </form>
+    <hr />
+</div>
+<div class="expense_upload">
+    <h4>Account Details and Monthly Expense Upload</h4>
+    <form asp-action="UploadImageDB"
+          asp-controller="Images"
+          method="post"
+          enctype="multipart/form-data">
+        <input type="file" id="file1"
+               name="file1"
+               multiple="multiple" class="btn btn-info" />
+        <input type="hidden" id="projectID" name="projectID" value=@Model.SHEId>
+        <button type="submit" class="btn btn-primary">Upload File(s)</button>
+    </form>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.SHEId">Edit</a> |

@@ -13,12 +13,12 @@ namespace KalamYouthForumWebApp.Models
 
         [Required]
         [StringLength(50, ErrorMessage = "Please enter the name of the SHE", MinimumLength = 1)]
-        [Display(Name = "SHE Name")]
+        [Display(Name = "SHG Name")]
         public string SHEName { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
-        [Display(Name = "SHE Date of Formation")]
+        [Display(Name = "SHG Date of Formation")]
         public DateTime DateOfFormation { get; set; }
 
         [Required]
