@@ -33,6 +33,9 @@ namespace KalamYouthForumWebApp.Data
         //add SHG Member Model
         public DbSet<SHGMember> shgMembers { get; set; }
 
+        // add UserXChapter Model to DB
+        public DbSet<UserXChapter> UserXChapters { get; set; }
+
     }
 
 }
