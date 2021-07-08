@@ -13,10 +13,10 @@
                     <h2><a asp-controller="Projects" asp-action="View" asp-route-id="@projects.Project.ProjectIDKey">@projects.Project.Heading</a></h2>
                     <div class="container">
                         <div class="row">
-                            <div class="col">
-                                <img src="@projects.RelatedProjectImages.ToList()[0].ImageDataURL" width="300" />
+                            <div class="col-md">
+                                <img src="@projects.RelatedProjectImages.ToList()[0].ImageDataURL" width="100%" />
                             </div>
-                            <div class="col project-info">
+                            <div class="col-md project-info">
                                 <p><a asp-controller="Projects" asp-action="View" asp-route-id="@projects.Project.ProjectIDKey">Read More</a></p>
                                 <p>@projects.Project.DateOfPublish.ToString("dd/MM/yyyy")</p>
                                 <div>@Html.Raw(projects.Project.Content)</div>

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using KalamYouthForumWebApp.Data;
 using KalamYouthForumWebApp.Models;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KalamYouthForumWebApp.Controllers
 {
@@ -20,12 +21,14 @@ namespace KalamYouthForumWebApp.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Admin, Moderator")]
         [HttpGet]
         public IActionResult UploadImage()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin, Moderator")]
         [HttpPost]
         public IActionResult UploadImageDB(int projectID=1)
         {
@@ -57,12 +60,14 @@ namespace KalamYouthForumWebApp.Controllers
             return RedirectToAction("Edit" , "Projects", new { id = projectID });
         }
 
+        [Authorize(Roles = "Admin, Moderator")]
         [HttpGet]
         public IActionResult UploadDefaultImage()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin, Moderator")]
         // Upload default Image
         [HttpPost]
         public IActionResult UploadDefaultImageDB()
@@ -97,7 +102,7 @@ namespace KalamYouthForumWebApp.Controllers
             return RedirectToAction("Index", "Images");
         }
 
-        //[HttpGet]
+        [Authorize(Roles = "Admin, Moderator")]
         public int GetDefaultImageDB()
         {
             var image = _context.Images.Where(i => i.ImageTitle.StartsWith("default_image_project_thumbnail")).FirstOrDefault();
@@ -108,12 +113,14 @@ namespace KalamYouthForumWebApp.Controllers
             else return -1;
         }
 
+        [Authorize(Roles = "Admin, Moderator")]
         // GET: Images
         public async Task<IActionResult> Index()
         {
             return View(await _context.Images.ToListAsync());
         }
 
+        [Authorize(Roles = "Admin, Moderator")]
         // GET: Images/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -133,7 +140,9 @@ namespace KalamYouthForumWebApp.Controllers
             return View(image);
         }
 
+
         // GET: Images/Create
+        [Authorize(Roles = "Admin, Moderator")]
         public IActionResult Create()
         {
             return View();
@@ -142,6 +151,7 @@ namespace KalamYouthForumWebApp.Controllers
         // POST: Images/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Moderator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ImageTitle,ImageData")] Image image)
@@ -156,6 +166,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // GET: Images/Edit/5
+        [Authorize(Roles = "Admin, Moderator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -174,6 +185,7 @@ namespace KalamYouthForumWebApp.Controllers
         // POST: Images/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Moderator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ImageTitle,ImageData")] Image image)
@@ -207,6 +219,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // GET: Images/Delete/5
+        [Authorize(Roles = "Admin, Moderator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -225,6 +238,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // POST: Images/Delete/5
+        [Authorize(Roles = "Admin, Moderator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

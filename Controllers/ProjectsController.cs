@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using KalamYouthForumWebApp.Data;
 using KalamYouthForumWebApp.Models;
 using KalamYouthForumWebApp.Models.ViewModels;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace KalamYouthForumWebApp.Controllers
 {
@@ -21,12 +21,14 @@ namespace KalamYouthForumWebApp.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Admin, Moderator")]
         // GET: Projects
         public async Task<IActionResult> Index()
         {
             return View(await _context.Project.ToListAsync());
         }
 
+        [Authorize(Roles = "Admin, Moderator")]
         [HttpGet]
         public IActionResult List()
 
@@ -62,6 +64,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // GET: Projects/Details/5
+        [Authorize(Roles = "Admin, Moderator")]
         public IActionResult Details(int? id)
         {
             ProjectImages ViewModel = new ProjectImages();
@@ -87,6 +90,7 @@ namespace KalamYouthForumWebApp.Controllers
             return View(ViewModel);
         }
 
+        [HttpGet]
         public IActionResult View(int? id)
         {
             ProjectImages ViewModel = new ProjectImages();
@@ -125,6 +129,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // GET: Projects/Create
+        [Authorize(Roles = "Admin, Moderator")]
         public IActionResult Create()
         {
             return View();
@@ -133,6 +138,7 @@ namespace KalamYouthForumWebApp.Controllers
         // POST: Projects/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Moderator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ProjectIDKey,Heading,Content,FilePath")] Project project)
@@ -150,6 +156,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // GET: Projects/Edit/5
+        [Authorize(Roles = "Admin, Moderator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -170,6 +177,7 @@ namespace KalamYouthForumWebApp.Controllers
         // POST: Projects/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Moderator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ProjectIDKey,Heading,Content,FilePath")] Project project)
@@ -204,6 +212,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // GET: Projects/Delete/5
+        [Authorize(Roles = "Admin, Moderator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -222,6 +231,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // POST: Projects/Delete/5
+        [Authorize(Roles = "Admin, Moderator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

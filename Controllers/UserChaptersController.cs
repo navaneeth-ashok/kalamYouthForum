@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KalamYouthForumWebApp.Data;
 using KalamYouthForumWebApp.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KalamYouthForumWebApp.Controllers
 {
@@ -19,7 +20,9 @@ namespace KalamYouthForumWebApp.Controllers
             _context = context;
         }
 
+
         // GET: UserChapters
+        [Authorize(Roles = "Admin, Moderator, Chapter")]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.UserXChapters.Include(u => u.ApplicationUser).Include(u => u.Chapter);
@@ -27,6 +30,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // GET: UserChapters/Details/5
+        [Authorize(Roles = "Admin, Moderator, Chapter")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,6 +51,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // GET: UserChapters/Create
+        [Authorize(Roles = "Admin, Moderator, Chapter")]
         public IActionResult Create()
         {
             ViewData["UserID"] = new SelectList(_context.Users, "Id", "UserName");
@@ -57,6 +62,7 @@ namespace KalamYouthForumWebApp.Controllers
         // POST: UserChapters/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Moderator, Chapter")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,UserID,ChapterID")] UserXChapter userXChapter)
@@ -73,6 +79,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // GET: UserChapters/Edit/5
+        [Authorize(Roles = "Admin, Moderator, Chapter")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -93,6 +100,7 @@ namespace KalamYouthForumWebApp.Controllers
         // POST: UserChapters/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Moderator, Chapter")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,UserID,ChapterID")] UserXChapter userXChapter)
@@ -128,6 +136,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // GET: UserChapters/Delete/5
+        [Authorize(Roles = "Admin, Moderator, Chapter")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -148,6 +157,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // POST: UserChapters/Delete/5
+        [Authorize(Roles = "Admin, Moderator, Chapter")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using KalamYouthForumWebApp.Data;
 using KalamYouthForumWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KalamYouthForumWebApp.Controllers
 {
@@ -21,7 +22,7 @@ namespace KalamYouthForumWebApp.Controllers
             _context = context;
         }
 
-
+        [Authorize(Roles = "Admin, Moderator")]
         // GET: api/ImagesData
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Image>>> GetImages()
@@ -29,6 +30,7 @@ namespace KalamYouthForumWebApp.Controllers
             return await _context.Images.ToListAsync();
         }
 
+        [Authorize(Roles = "Admin, Moderator")]
         // GET: api/ImagesData/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Image>> GetImage(int id)
@@ -45,6 +47,7 @@ namespace KalamYouthForumWebApp.Controllers
 
         // PUT: api/ImagesData/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Admin, Moderator")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutImage(int id, Image image)
         {
@@ -76,6 +79,7 @@ namespace KalamYouthForumWebApp.Controllers
 
         // POST: api/ImagesData
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Authorize(Roles = "Admin, Moderator")]
         [HttpPost]
         public async Task<ActionResult<Image>> PostImage(Image image)
         {
@@ -86,6 +90,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // POST: api/ImagesData/5
+        [Authorize(Roles = "Admin, Moderator")]
         [HttpPost("{id}")]
         public async Task<IActionResult> DeleteImage(int id)
         {

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using KalamYouthForumWebApp.Data;
 using KalamYouthForumWebApp.Models;
 using KalamYouthForumWebApp.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KalamYouthForumWebApp.Controllers
 {
@@ -20,6 +21,7 @@ namespace KalamYouthForumWebApp.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
         // GET: SHE
         public async Task<IActionResult> Index()
         {
@@ -61,6 +63,7 @@ namespace KalamYouthForumWebApp.Controllers
             return View(sheChapters);
         }
 
+        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
         public void AssociateSHEToChapter(int chapterID, int sheID)
         {
             // Adding SHE to Chapter
@@ -74,7 +77,9 @@ namespace KalamYouthForumWebApp.Controllers
             _context.SaveChanges();
         }
 
+
         // GET: SHE/Details/5
+        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -97,7 +102,7 @@ namespace KalamYouthForumWebApp.Controllers
         //{
         //    return View();
         //}
-
+        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
         [HttpPost]
         public IActionResult Create(int chapterID)
         {
@@ -108,6 +113,7 @@ namespace KalamYouthForumWebApp.Controllers
         // POST: SHE/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateSHE([Bind("SHEId,SHEName,DateOfFormation,NumberOfMembers,ElectedPresident,PresidentEmail,PresidentPhoneNumber,ElectedSecretary,SecretaryEmail,SecretaryPhoneNumber,ElectedTreasurer,TreasurerEmail,TreasurerPhoneNumber")] SHEModel sHEModel, int chapterID)
@@ -124,12 +130,14 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
         public IActionResult AddMembers(int shgID)
         {
             ViewBag.shgID = shgID;
             return View();
         }
 
+        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
         [HttpGet]
         public IActionResult ViewSHGMember(int id)
         {
@@ -142,6 +150,7 @@ namespace KalamYouthForumWebApp.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
         [HttpPost]
         public IActionResult ViewAllSHGMembers()
         {
@@ -154,6 +163,7 @@ namespace KalamYouthForumWebApp.Controllers
             return View(shgMembers);
         }
 
+        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
         [HttpPost]
         public IActionResult ViewMembers(int shgID)
         {
@@ -167,6 +177,7 @@ namespace KalamYouthForumWebApp.Controllers
             return View(shgMembers);
         }
 
+        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddMembersToSHG(SHGMember memberModel)
@@ -181,6 +192,7 @@ namespace KalamYouthForumWebApp.Controllers
             return View(memberModel);
         }
 
+        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
         [HttpGet]
         public IActionResult DeleteMembersFromSHG(int id)
         {
@@ -188,6 +200,7 @@ namespace KalamYouthForumWebApp.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
         [HttpGet]
         public IActionResult EditSHGMember(int id)
         {
@@ -195,6 +208,7 @@ namespace KalamYouthForumWebApp.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditSHGMember(int SHGMemberId, SHGMember shgMember)
@@ -227,6 +241,7 @@ namespace KalamYouthForumWebApp.Controllers
             return View(shgMember);
         }
 
+        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteMembersFromSHGConfirmed(int SHGMemberId)
@@ -239,6 +254,7 @@ namespace KalamYouthForumWebApp.Controllers
             return RedirectToAction("Details", new { id = model.SHEId });
         }
 
+        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
         public void ReCalculateMemberCount(int id)
         {
             var sHEModel = _context.sheModels.Find(id);
@@ -249,6 +265,7 @@ namespace KalamYouthForumWebApp.Controllers
 
 
         // GET: SHE/Edit/5
+        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -267,6 +284,7 @@ namespace KalamYouthForumWebApp.Controllers
         // POST: SHE/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("SHEId,SHEName,DateOfFormation,NumberOfMembers,ElectedPresident,PresidentEmail,PresidentPhoneNumber,ElectedSecretary,SecretaryEmail,SecretaryPhoneNumber,ElectedTreasurer,TreasurerEmail,TreasurerPhoneNumber")] SHEModel sHEModel)
@@ -300,6 +318,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // GET: SHE/Delete/5
+        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -318,6 +337,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // POST: SHE/Delete/5
+        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

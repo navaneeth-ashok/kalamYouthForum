@@ -14,16 +14,16 @@
     
 </div>
 
-<div class="container-fluid mb-5">
+<div class="container-fluid mb-5 project-listing-card">
     <div class="row">
         @foreach (var projects in Model)
         {
-            <div class="col">
+            <div class="col-lg">
                 <div class="index-project-card">
                     <div class="container">
                         <div class="row">
-                            <div class="col">
-                                <img src="@projects.RelatedProjectImages.ToList()[0].ImageDataURL" width="300" />
+                            <div class="col-6">
+                                <img src="@projects.RelatedProjectImages.ToList()[0].ImageDataURL" width="100%"/>
                             </div>
                             <div class="col project-info">
                                 <h3>@projects.Project.Heading</h3>

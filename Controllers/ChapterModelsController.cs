@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using KalamYouthForumWebApp.Data;
 using KalamYouthForumWebApp.Models;
 using KalamYouthForumWebApp.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KalamYouthForumWebApp.Controllers
 {
@@ -20,12 +21,14 @@ namespace KalamYouthForumWebApp.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Admin, Moderator, Chapter")]
         // GET: ChapterModels
         public async Task<IActionResult> Index()
         {
             return View(await _context.chapterModels.ToListAsync());
         }
 
+        [Authorize(Roles = "Admin, Moderator, Chapter")]
         // GET: ChapterModels/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -53,6 +56,7 @@ namespace KalamYouthForumWebApp.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin, Moderator, Chapter")]
         // GET: ChapterModels/Create
         public IActionResult Create()
         {
@@ -62,6 +66,7 @@ namespace KalamYouthForumWebApp.Controllers
         // POST: ChapterModels/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Moderator, Chapter")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ChapterID,ChapterName,Panchayat,Muncipality,Taluk,Constituency,OfficeAddress")] ChapterModel chapterModel)
@@ -76,6 +81,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // GET: ChapterModels/Edit/5
+        [Authorize(Roles = "Admin, Moderator, Chapter")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -94,6 +100,7 @@ namespace KalamYouthForumWebApp.Controllers
         // POST: ChapterModels/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Moderator, Chapter")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ChapterID,ChapterName,Panchayat,Muncipality,Taluk,Constituency,OfficeAddress")] ChapterModel chapterModel)
@@ -127,6 +134,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // GET: ChapterModels/Delete/5
+        [Authorize(Roles = "Admin, Moderator, Chapter")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -145,6 +153,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // POST: ChapterModels/Delete/5
+        [Authorize(Roles = "Admin, Moderator, Chapter")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

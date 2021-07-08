@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using KalamYouthForumWebApp.Data;
 using KalamYouthForumWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KalamYouthForumWebApp.Controllers
 {
@@ -21,8 +22,9 @@ namespace KalamYouthForumWebApp.Controllers
             this.roleManager = roleManager;
             _context = context;
             this.userManager = userManager;
-        }   
+        }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Index()
         {
@@ -40,6 +42,7 @@ namespace KalamYouthForumWebApp.Controllers
             return View(roleViewModels);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Details(string id)
         {
@@ -80,12 +83,14 @@ namespace KalamYouthForumWebApp.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult CreateRole()
         {
             return View();
         }
-        
+
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> CreateRoleAsync(RoleViewModel roleViewModel)
         {
@@ -106,6 +111,7 @@ namespace KalamYouthForumWebApp.Controllers
             return View(roleViewModel);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> EditUsersInRole(string roleID)
         {
@@ -142,6 +148,7 @@ namespace KalamYouthForumWebApp.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> EditUsersInRole(List<UserRoleViewModel> model, string roleId)
         {

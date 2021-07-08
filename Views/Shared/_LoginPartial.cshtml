@@ -4,9 +4,15 @@
 @*<ul class="navbar-nav ms-auto login-nav">*@
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-        <a class="nav-link text-light" asp-action="Index" asp-controller="Manage" title="Manage">Manage</a>
-    </li>
+
+
+    @if (User.IsInRole("Admin") || User.IsInRole("Moderator") || User.IsInRole("Chapter") || User.IsInRole("SHGUser"))
+    { 
+        <li class="nav-item">
+            <a class="nav-link text-light" asp-action="Index" asp-controller="Manage" title="Manage">Manage</a>
+        </li>
+    }
+    
     <li class="nav-item">
         <a class="nav-link text-light navbar-username" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
     </li>

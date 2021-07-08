@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KalamYouthForumWebApp.Data;
 using KalamYouthForumWebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KalamYouthForumWebApp.Controllers
 {
@@ -20,12 +21,14 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // GET: NewsletterList
+        [Authorize(Roles = "Admin, Moderator")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.newsletterLists.ToListAsync());
         }
 
         // GET: NewsletterList/Details/5
+        [Authorize(Roles = "Admin, Moderator")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,6 +47,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // GET: NewsletterList/Create
+        [Authorize(Roles = "Admin, Moderator")]
         public IActionResult Create()
         {
             return View();
@@ -52,6 +56,7 @@ namespace KalamYouthForumWebApp.Controllers
         // POST: NewsletterList/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Moderator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(string EmailID)
@@ -70,6 +75,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // GET: NewsletterList/Edit/5
+        [Authorize(Roles = "Admin, Moderator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -88,6 +94,7 @@ namespace KalamYouthForumWebApp.Controllers
         // POST: NewsletterList/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Moderator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,EmailID")] NewsletterList newsletterList)
@@ -121,6 +128,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // GET: NewsletterList/Delete/5
+        [Authorize(Roles = "Admin, Moderator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -139,6 +147,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // POST: NewsletterList/Delete/5
+        [Authorize(Roles = "Admin, Moderator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -360,7 +360,6 @@ C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\bin\Debug\net5.0\runtimes\
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\KalamYouthForumWebApp.csprojAssemblyReference.cache
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\KalamYouthForumWebApp.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\KalamYouthForumWebApp.AssemblyInfoInputs.cache
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\KalamYouthForumWebApp.AssemblyInfo.cs
@@ -498,3 +497,4 @@ C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Vie
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\NewsletterList\Index.cshtml.g.cs
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\SHE\DeleteMembersFromSHG.cshtml.g.cs
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\SHE\EditSHGMember.cshtml.g.cs
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\KalamYouthForumWebApp.csprojAssemblyReference.cache
