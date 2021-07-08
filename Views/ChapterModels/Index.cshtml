@@ -16,6 +16,9 @@
                 @Html.Encode("Chapter ID")
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.ChapterName)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Panchayat)
             </th>
             <th>
@@ -38,6 +41,9 @@
         <tr>
             <td>
                 <a asp-action="Details" asp-route-id="@item.ChapterID">@("CHPT10" + Html.Encode(item.ChapterID))</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChapterName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Panchayat)

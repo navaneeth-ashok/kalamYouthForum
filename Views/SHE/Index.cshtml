@@ -7,8 +7,8 @@
 <h1>SHG Listing Page</h1>
 
 @*<p>
-    <a asp-action="Create">Create New</a>
-</p>*@
+        <a asp-action="Create">Create New</a>
+    </p>*@
 <table class="table">
     <thead>
         <tr>
@@ -22,14 +22,14 @@
                 @Html.DisplayNameFor(model => model.SHEModel.NumberOfMembers)
             </th>
             <th>
-                @Html.Encode("Chapter ID")
+                @Html.Encode("Chapter Name")
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.SHEModel.ElectedPresident)
             </th>
             @*<th>
-            @Html.DisplayNameFor(model => model.PresidentEmail)
-        </th>*@
+                @Html.DisplayNameFor(model => model.PresidentEmail)
+                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.SHEModel.PresidentPhoneNumber)
             </th>
@@ -37,71 +37,73 @@
                 @Html.DisplayNameFor(model => model.SHEModel.ElectedSecretary)
             </th>
             @*<th>
-            @Html.DisplayNameFor(model => model.SecretaryEmail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SecretaryPhoneNumber)
-        </th>*@
+                @Html.DisplayNameFor(model => model.SecretaryEmail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SecretaryPhoneNumber)
+                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.SHEModel.ElectedTreasurer)
             </th>
             @*<th>
-            @Html.DisplayNameFor(model => model.TreasurerEmail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TreasurerPhoneNumber)
-        </th>*@
+                    @Html.DisplayNameFor(model => model.TreasurerEmail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TreasurerPhoneNumber)
+                </th>*@
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SHEModel.SHEName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SHEModel.DateOfFormation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SHEModel.NumberOfMembers)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Chapter.ChapterID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SHEModel.ElectedPresident)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.PresidentEmail)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.SHEModel.PresidentPhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SHEModel.ElectedSecretary)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.SecretaryEmail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SecretaryPhoneNumber)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.SHEModel.ElectedTreasurer)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.TreasurerEmail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TreasurerPhoneNumber)
-            </td>*@
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.SHEModel.SHEId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.SHEModel.SHEId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.SHEModel.SHEId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.SHEModel.SHEId">@Html.DisplayFor(modelItem => item.SHEModel.SHEName)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SHEModel.DateOfFormation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SHEModel.NumberOfMembers)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-controller="ChapterModels" asp-route-id="@item.Chapter.ChapterID">@Html.DisplayFor(modelItem => item.Chapter.ChapterName)</a>
+                    
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SHEModel.ElectedPresident)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.PresidentEmail)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.SHEModel.PresidentPhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SHEModel.ElectedSecretary)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.SecretaryEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SecretaryPhoneNumber)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.SHEModel.ElectedTreasurer)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.TreasurerEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TreasurerPhoneNumber)
+                    </td>*@
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.SHEModel.SHEId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.SHEModel.SHEId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.SHEModel.SHEId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

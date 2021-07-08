@@ -13,6 +13,11 @@ namespace KalamYouthForumWebApp.Models
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+        [Display(Name = "Name of the Chapter")]
+        public string ChapterName { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
         [Display(Name = "Name of Panchayat")]
         public string Panchayat { get; set; }
         

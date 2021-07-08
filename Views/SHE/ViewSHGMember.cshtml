@@ -65,7 +65,8 @@
         </dd>
     </dl>
 </div>
-@*<div>
-    <a asp-action="Edit" asp-route-id="@Model.SHGMemberId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>*@
+<div>
+    <a asp-action="EditSHGMember" asp-route-id="@Model.SHGMemberId">Edit</a> |
+    <a asp-action="DeleteMembersFromSHG" asp-route-id="@Model.SHGMemberId">Delete</a> |
+    @*<a href="javascript:void(0);" onclick="history.go(-1);">Back to List</a>*@
+</div>

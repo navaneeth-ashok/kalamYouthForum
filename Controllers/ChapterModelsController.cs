@@ -64,7 +64,7 @@ namespace KalamYouthForumWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ChapterID,Panchayat,Muncipality,Taluk,Constituency,OfficeAddress")] ChapterModel chapterModel)
+        public async Task<IActionResult> Create([Bind("ChapterID,ChapterName,Panchayat,Muncipality,Taluk,Constituency,OfficeAddress")] ChapterModel chapterModel)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace KalamYouthForumWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ChapterID,Panchayat,Muncipality,Taluk,Constituency,OfficeAddress")] ChapterModel chapterModel)
+        public async Task<IActionResult> Edit(int id, [Bind("ChapterID,ChapterName,Panchayat,Muncipality,Taluk,Constituency,OfficeAddress")] ChapterModel chapterModel)
         {
             if (id != chapterModel.ChapterID)
             {

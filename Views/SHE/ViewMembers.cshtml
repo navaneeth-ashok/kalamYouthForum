@@ -6,9 +6,10 @@
 
 <h1>View Members for SHG: @ViewBag.shgID</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<form asp-action="AddMembers" asp-controller="SHE" method="post">
+    <input type="hidden" name="shgID" value="@ViewBag.shgID" />
+    <input type="submit" name="submit" class="btn btn-success" value="Add members" />
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -67,9 +68,9 @@
                 @Html.DisplayFor(modelItem => item.Gender)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.SHGMemberId">Edit</a> |
+                <a asp-action="EditSHGMember" asp-route-id="@item.SHGMemberId">Edit</a> |
                 <a asp-action="ViewSHGMember" asp-route-id="@item.SHGMemberId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.SHGMemberId">Delete</a>
+                <a asp-action="DeleteMembersFromSHG" asp-route-id="@item.SHGMemberId">Delete</a>
             </td>
         </tr>
 }

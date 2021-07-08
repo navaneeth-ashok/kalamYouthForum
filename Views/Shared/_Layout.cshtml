@@ -78,11 +78,11 @@
             <div class="row">
                 <div class="col">
                     <h4>SignUp for our newsletter</h4>
-                    <form method="post" action="">
-                        <input type="email" name="emailID" placeholder="Email ID" />
-                        @*<input type="submit" value="" alt="Submit" />*@
-                        <input type="image" src="/assets/images/form/newsletter.svg" border="0" alt="Submit" />
-                    </form>
+                    <div>
+                        <input type="email" name="EmailID" placeholder="Email ID" id="newsletterId" />
+                        <input type="image" src="/assets/images/form/newsletter.svg" border="0" onclick="receiveMail()" />
+                    </div>
+                    <span id="message"></span>
                 </div>
                 <div class="col">
                     <h4>Follow Us</h4>
@@ -120,3 +120,24 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+<script>
+        function receiveMail () {
+            var data = { EmailID: $('#newsletterId').val() };
+
+            $.ajax({
+                url: '@Url.Action("Create", "NewsletterList")',
+                type: "post",
+                data: data,
+                headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
+                success: function (result) {
+                    document.getElementById("message").innerText = "Successfully subscribed to the newsletter";
+                },
+                error: function (result) {
+                    document.getElementById("message").innerText = "Sorry, there was an error from our end, we are looking into it";
+                }
+            });
+        }
+
+
+</script>

@@ -44,7 +44,13 @@ namespace KalamYouthForumWebApp.Controllers
             foreach (var she in shes)
             {
                 SHEModel sheModel = _context.sheModels.Include(c => c.ChapterModels).Where(a => a.SHEId == she.SHEId).FirstOrDefault();
-                ChapterModel chapterModel = _context.chapterModels.Include(c => c.SHEModels).Where(a => a.ChapterID == she.ChapterModels.First().ChapterID).FirstOrDefault();
+                System.Diagnostics.Debug.WriteLine(she.SHEName);
+                System.Diagnostics.Debug.WriteLine(she.ChapterModels.First().ChapterID);
+                System.Diagnostics.Debug.WriteLine(she.ChapterModels.First().ChapterName);
+                // because an SHG is part of one chapter only, retrieve the Chapter associated with it
+                // and send to view
+                ChapterModel chapterModel = she.ChapterModels.FirstOrDefault();
+
                 var model = new SHEChapter
                 {
                     Chapter = chapterModel,
@@ -52,20 +58,6 @@ namespace KalamYouthForumWebApp.Controllers
                 };
                 sheChapters.Add(model);
             }
-
-            //List<SHEChapter> sheChapters = new List<SHEChapter>();
-            //foreach (var chapter in chapters)
-            //{
-            //    foreach(var she in chapter.SHEModels)
-            //    {
-            //        var model = new SHEChapter
-            //        {
-            //            Chapter = chapter,
-            //            SHEModel = she
-            //        };
-            //        sheChapters.Add(model);
-            //    }
-            //}
             return View(sheChapters);
         }
 
@@ -75,6 +67,9 @@ namespace KalamYouthForumWebApp.Controllers
             ChapterModel SelectedChapter = _context.chapterModels.Include(c => c.SHEModels).Where(a => a.ChapterID == chapterID).FirstOrDefault();
             SHEModel sheModel = _context.sheModels.Find(sheID);
             SelectedChapter.SHEModels.Add(sheModel);
+            // Adding Chapter to SHE
+            SHEModel SelectedSHGModel = _context.sheModels.Include(a => a.ChapterModels).Where(b => b.SHEId == sheID).FirstOrDefault();
+            SelectedSHGModel.ChapterModels.Add(SelectedChapter);
 
             _context.SaveChanges();
         }
@@ -180,9 +175,76 @@ namespace KalamYouthForumWebApp.Controllers
             {
                 _context.Add(memberModel);
                 await _context.SaveChangesAsync();
+                ReCalculateMemberCount(memberModel.SHEId);
                 return RedirectToAction("Details", "SHE", new { id = memberModel.SHEId });
             }
             return View(memberModel);
+        }
+
+        [HttpGet]
+        public IActionResult DeleteMembersFromSHG(int id)
+        {
+            var model = _context.shgMembers.Find(id);
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult EditSHGMember(int id)
+        {
+            var model = _context.shgMembers.Find(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditSHGMember(int SHGMemberId, SHGMember shgMember)
+        {
+            if (SHGMemberId != shgMember.SHGMemberId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(shgMember);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!SHEModelExists(shgMember.SHGMemberId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("Details", new { id = shgMember.SHEId });
+            }
+            return View(shgMember);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteMembersFromSHGConfirmed(int SHGMemberId)
+        {
+            System.Diagnostics.Debug.WriteLine(SHGMemberId);
+            var model = _context.shgMembers.Find(SHGMemberId);
+            _context.shgMembers.Remove(model);
+            await _context.SaveChangesAsync();
+            ReCalculateMemberCount(model.SHEId);
+            return RedirectToAction("Details", new { id = model.SHEId });
+        }
+
+        public void ReCalculateMemberCount(int id)
+        {
+            var sHEModel = _context.sheModels.Find(id);
+            int shgMemberCount = _context.shgMembers.Where(a => a.SHEId == id).ToList().Count();
+            sHEModel.NumberOfMembers = shgMemberCount;
+            _context.SaveChanges();
         }
 
 

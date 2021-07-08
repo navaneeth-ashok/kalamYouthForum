@@ -142,6 +142,11 @@ namespace KalamYouthForumWebApp.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ChapterName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("Constituency")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -191,6 +196,22 @@ namespace KalamYouthForumWebApp.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Images");
+                });
+
+            modelBuilder.Entity("KalamYouthForumWebApp.Models.NewsletterList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("EmailID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("newsletterLists");
                 });
 
             modelBuilder.Entity("KalamYouthForumWebApp.Models.Project", b =>
@@ -343,8 +364,10 @@ namespace KalamYouthForumWebApp.Data.Migrations
 
             modelBuilder.Entity("KalamYouthForumWebApp.Models.ViewModels.UserXChapter", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("ChapterID")
                         .HasColumnType("int");
@@ -359,6 +382,28 @@ namespace KalamYouthForumWebApp.Data.Migrations
                     b.HasIndex("UserID");
 
                     b.ToTable("UserXChapters");
+                });
+
+            modelBuilder.Entity("KalamYouthForumWebApp.Models.ViewModels.UserXSHG", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("SHGID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SHGID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("UserXSHGs");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -552,6 +597,23 @@ namespace KalamYouthForumWebApp.Data.Migrations
                     b.Navigation("ApplicationUser");
 
                     b.Navigation("Chapter");
+                });
+
+            modelBuilder.Entity("KalamYouthForumWebApp.Models.ViewModels.UserXSHG", b =>
+                {
+                    b.HasOne("KalamYouthForumWebApp.Models.SHEModel", "SHEModel")
+                        .WithMany()
+                        .HasForeignKey("SHGID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KalamYouthForumWebApp.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserID");
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("SHEModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

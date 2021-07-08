@@ -65,9 +65,39 @@
                     <h6 class="card-subtitle mb-2 text-muted">View all registered SHG members</h6>
                     <p class="card-text">Use this card to view all the members registered in all the SHGs.</p>
                     <form action="/SHE/ViewAllSHGMembers" method="post">
-                        <input type="submit" class="card-link btn btn-primary" value="Manage"/>
+                        <input type="submit" class="card-link btn btn-primary" value="Manage" />
                     </form>
                     @*<a asp-action="Index" asp-controller="Administration" class="card-link btn btn-primary">Manage</a>*@
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card rounded shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Users to Chapters Binding</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Add/Remove/Assign Users to different Chapters</h6>
+                    <p class="card-text">Use this card to assign registered users to different chapters.</p>
+                    <a asp-action="Index" asp-controller="UserChapters" class="card-link btn btn-primary">Manage</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card rounded shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Users to SHG Binding</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Add/Remove/Assign Users to different SHG</h6>
+                    <p class="card-text">Use this card to assign registered users to different self help groups.</p>
+                    <a asp-action="Index" asp-controller="UserSHG" class="card-link btn btn-primary">Manage</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card rounded shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Newsletter List</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Add/Remove newsletter EmailIDs</h6>
+                    <p class="card-text">Use this card to manage the list of email ids submitted by readers.</p>
+                    <a asp-action="Index" asp-controller="NewsLetterList" class="card-link btn btn-primary">Manage</a>
                 </div>
             </div>
         </div>

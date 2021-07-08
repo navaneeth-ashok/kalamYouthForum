@@ -11,7 +11,7 @@ namespace KalamYouthForumWebApp.Models.ViewModels
     public class UserXChapter
     {
         [Key]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public string UserID { get; set; }
         [ForeignKey("UserID")]
