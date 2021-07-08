@@ -164,15 +164,15 @@ a.navbar-username {
     width: 150px;
     border: 10px solid #096d82;
     position: absolute;
-    top: 120px;
-    left: 173px;
+    top: 138px;
+    left: 185px;
     z-index: 1;
 }
 
 #rect2 {
     height: 200px;
     width: 200px;
-    border: 10px solid #7298a0;
+    border: 10px solid #7298a096;
     position: absolute;
     top: -19px;
     left: 30px;
@@ -183,11 +183,12 @@ a.navbar-username {
     height: 100px;
     width: 100px;
     left: 152px;
-    top: 104px;
+    top: 135px;
 }
 
 .contact-us #rect2 {
     height: 150px;
+    top: 16px;
     width: 150px;
 }
 
@@ -226,6 +227,11 @@ address a {
 }
 
 /*Project Page*/
+
+.carousel{
+    margin-top: 60px;
+}
+
 .project-carousel > .carousel-item {
     background-size: cover;
     max-height: 300px;
@@ -301,7 +307,7 @@ img.carousel-item{
 
 .project-list .input-group{
     margin: 0;
-    width: 300px;
+    max-width: 300px;
     margin-left: auto;
 }
 
@@ -384,6 +390,7 @@ footer input[type=email]{
     height: 50px;
     padding-left: 10px;
     font: inherit;
+    margin-left: 16px;
 }
 footer input[type=image]{
     border: none;
@@ -430,11 +437,62 @@ footer input[type=image]:hover{
 }*/
 
 
-@media (min-width: 992px) {
+/*@media (min-width: 992px) {
     .container-scroll {
     overflow-x: auto;
   }
   .container-scroll > .row {
-    width: 133.33333333%; /* = 100% * 4/3 */
-  }
+    width: 133.33333333%;*/ /* = 100% * 4/3 */
+  /*}
+
+}*/
+
+@media only screen and (max-width: 992px) {
+    #footer-donate {
+        margin-top: 20px;
+    }
+
+    #rect1{
+        display: none;
+    }
+
+    #rect2{
+        display: none;
+    }
+
+    .about-design h1 {
+        position: relative;
+        padding-top: 0;
+    }
+
+    .about-us {
+        padding: 40px;
+    }
+
+    .project-listing-card .col-lg{
+        margin-bottom: 20px;
+    }
+
+    .project-info{
+        max-height: 200px;
+    }
+
+    .about-design h1{
+        font-size: 3em;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .footer .col-md{
+        margin-top: 20px;
+    }
+
+    .footer .row {
+        --bs-gutter-x: 0px;
+    }
+
+    .carousel{
+        margin-top: 40px;
+    }
+
 }

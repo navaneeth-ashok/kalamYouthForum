@@ -78,7 +78,7 @@
             <div class="row">
                 <div class="col-md">
                     <h4>SignUp for our newsletter</h4>
-                    <div>
+                    <div class="newsletter-items">
                         <input type="email" name="EmailID" placeholder="Email ID" id="newsletterId" />
                         <input type="image" src="/assets/images/form/newsletter.svg" border="0" onclick="receiveMail()" />
                     </div>
@@ -123,7 +123,13 @@
 </html>
 
 <script>
-        function receiveMail () {
+    function receiveMail() {
+        let input = $('#newsletterId').val();
+        console.log(input);
+        if (input == null || input === "" || input == "") {
+            document.getElementById("message").innerText = "Please enter an Email ID";
+        } else {
+
             var data = { EmailID: $('#newsletterId').val() };
 
             $.ajax({
@@ -139,6 +145,8 @@
                 }
             });
         }
+
+}
 
 
 </script>
