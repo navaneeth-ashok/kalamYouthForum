@@ -7,7 +7,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAACimVoS+4m0SOVyldxSwdAAAAAAACAAAAAAAQZgAAAAEAACAAAAC3JQyfwLEPPjpc85JFofdHVUZNIMp7wbSDyey77UN9XwAAAAAOgAAAAAIAACAAAADTcOcZQHHM9sqG1OL+phm5J1gBUOKwENAF5dDgUuAG0IAAAAAjbZ8w5YJIVJ0eF3wsB4zo73C1wMQtcgQxz7WcYkTCENvZPG/hmb8hJpvVR2Updzmsl1LoBxnqcfCKJfX6mqADibc+39MasnF+F4BLq8nahmmn+Kkb7nhUaXbeM+nISG29LXFSat8N7ue2k12wv7wI2ZA+u6xoEmgIzI/Dg5HICEAAAABlXtn/W6k9OXBfC3w1/VWAIok/X6ljJQlKbdjC/h0SJiAEVY+nLgu63eh7OiAlxJdz+zvBLX8Tai55cLi5y2dd</EncryptedPassword>
-    <History>True|2021-07-08T19:13:17.9979979Z;True|2021-07-09T00:22:30.7637557+05:30;True|2021-07-08T22:29:18.3228342+05:30;True|2021-07-08T20:34:57.7466761+05:30;True|2021-07-08T20:17:12.4330665+05:30;</History>
+    <History>True|2021-07-10T18:48:07.4228402Z;True|2021-07-09T00:43:17.9979979+05:30;True|2021-07-09T00:22:30.7637557+05:30;True|2021-07-08T22:29:18.3228342+05:30;True|2021-07-08T20:34:57.7466761+05:30;True|2021-07-08T20:17:12.4330665+05:30;</History>
   </PropertyGroup>
   <ItemGroup>
     <DestinationConnectionStrings Include="DefaultConnection">

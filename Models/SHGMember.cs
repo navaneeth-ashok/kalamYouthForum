@@ -29,6 +29,16 @@ namespace KalamYouthForumWebApp.Models
         public string address { get; set; }
 
         [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 1)]
+        [Display(Name = "District")]
+        public string District { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 1)]
+        [Display(Name = "State")]
+        public string State { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -46,6 +56,10 @@ namespace KalamYouthForumWebApp.Models
         [Required]
         [Display(Name = "Blood Group")]
         public BloodGroupList BloodGroup { get; set; }
+
+        [Required]
+        [Display(Name = "SignUp for Blood Donation?")]
+        public bool BloodDonation { get; set; }
 
         [Required]
         [Display(Name = "Gender")]

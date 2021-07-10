@@ -498,3 +498,4 @@ C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Release\net5.0\KalamYo
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Release\net5.0\ref\KalamYouthForumWebApp.dll
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Release\net5.0\KalamYouthForumWebApp.pdb
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Release\net5.0\KalamYouthForumWebApp.genruntimeconfig.cache
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Release\net5.0\Razor\Views\Home\Registration.cshtml.g.cs

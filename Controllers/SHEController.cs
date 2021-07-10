@@ -141,12 +141,7 @@ namespace KalamYouthForumWebApp.Controllers
         [HttpGet]
         public IActionResult ViewSHGMember(int id)
         {
-            System.Diagnostics.Debug.WriteLine("###############");
-            System.Diagnostics.Debug.WriteLine(id);
             var model = _context.shgMembers.Find(id);
-            System.Diagnostics.Debug.WriteLine("###############");
-            System.Diagnostics.Debug.WriteLine(model.Name);
-            System.Diagnostics.Debug.WriteLine("###############");
             return View(model);
         }
 
