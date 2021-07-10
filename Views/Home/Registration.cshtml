@@ -1,0 +1,26 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<div class="volunteer-registration mb-5">
+    <div class="volunteer-registration__card">
+        <h2 class="mb-4">Become a member of our community</h2>
+        <div class="container">
+            <form action="/Identity/Account/Register" method="get">
+                <div class="form-floating mb-3">
+                    <input type="text" name="Input.Name" class="form-control" placeholder="Name" />
+                    <label for="Input.Name" class="col-form-label">Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" name="Input.PhoneNumber" class="form-control" placeholder="Phone" />
+                    <label for="Input.PhoneNumber" class="col-form-label">Phone Number</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" name="Input.Email" class="form-control" placeholder="Email" />
+                    <label for="Input.Email" class="col-form-label">Email</label>
+                </div>
+                <button type="submit" class="btn btn-primary mb-3 mt-0">Sign Up</button>
+            </form>
+        </div>
+    </div>
+</div>

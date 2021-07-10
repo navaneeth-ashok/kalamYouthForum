@@ -200,11 +200,11 @@ a.navbar-username {
     padding: 50px 0px;
     border-radius: 10px;
     background-color: #e6e6e6;
-    box-shadow: 0px 10px 20px grey;
+    box-shadow: 0px 5px 20px #414142cf;
     transition: all 0.3s linear;
 }
 .about-us.contact-us .contact-card:hover {
-    box-shadow: 10px 10px 20px grey;
+    box-shadow: 0px 5px 30px #717171;
     transform: scale(1.05,1.05); 
 }
 
@@ -213,8 +213,8 @@ a.navbar-username {
     padding: 40px;
 }
 .about-us .contact-card:hover {
-    box-shadow: 10px 10px 20px grey;
-    transform: none;
+    box-shadow: 0px 10px 30px #717171;
+    transform: scale(1.03,1.03);
 }
 
 .container h1{

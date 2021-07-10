@@ -5,9 +5,9 @@
     ViewData["Title"] = "Log in";
 }
 
-<h1>@ViewData["Title"]</h1>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-5 registration-card m-5">
+        <h2>@ViewData["Title"]</h2>
         <section>
             <form id="account" method="post">
                 <hr />
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Log in</button>
+                    <button type="submit" class="btn btn-primary mb-3">Log in</button>
                 </div>
                 <div class="form-group">
                     <p>
@@ -40,15 +40,20 @@
                     <p>
                         <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
                     </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="btn btn-secondary">Register as a new user</a>
-                    </p>
+
                 </div>
             </form>
         </section>
     </div>
-    <div class="col-md-6 col-md-offset-2">
+    <div class="col-md-5 registration-card m-5">
+        <h2>Register</h2>
+        <hr />
         <section>
+            <p>Be part of the dynamic community by registering for an account. The members have access to various projects, can manage multiple chapters, SHGs and keep track of all these information under one portal.</p>
+            <p style="font-style:italic">By registering with the service, you are agreeing to the license terms and conditions mentioned <a href="#" style="color:#003844;">here</a></p>
+            <div>
+                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="btn btn-success">Register as a new member</a>
+            </div>
             @*<a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="btn btn-info">Register as a new user</a>*@
             @*<h4>Use another service to log in.</h4>
             <hr />

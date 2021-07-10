@@ -373,8 +373,48 @@ img.carousel-item{
     color: #e9d72c;
 }
 
-/*footer*/
+/*Volunteer Registration*/
 
+.volunteer-registration {
+    border-radius: 10px;
+    margin: 0 auto;
+    width: 50%;
+    box-shadow: 0px 0px 10px #c8c8c8;
+    padding: 20px;
+}
+
+
+.volunteer-registration .container {
+    margin: 0 auto;
+    width: 80%;
+
+}
+
+.volunteer-registration h2 {
+    color: #134d44;
+}
+
+.volunteer-registration .btn {
+    background-color: #01809b;
+    border: none;
+}
+.volunteer-registration .btn:hover {
+    background-color: #003844;
+}
+
+.registration-card {
+    border-radius: 10px;
+    margin: 0 auto;
+    box-shadow: 0px 0px 10px #c8c8c8;
+    padding: 20px;
+}
+
+
+
+.volunteer-registration input{
+    max-width: 100%;
+}
+/*footer*/
 footer {
     background-color: #a3c6c6;
     text-align: center;
