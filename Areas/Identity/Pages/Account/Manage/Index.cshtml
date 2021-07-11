@@ -20,6 +20,37 @@
                 <input asp-for="Input.PhoneNumber" class="form-control" />
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Input.LocalBody"></label>
+                <input asp-for="Input.LocalBody" class="form-control" />
+                <span asp-validation-for="Input.LocalBody" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.District"></label>
+                <input asp-for="Input.District" class="form-control" />
+                <span asp-validation-for="Input.District" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.State"></label>
+                <input asp-for="Input.State" class="form-control" />
+                <span asp-validation-for="Input.State" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.BloodGroup"></label>
+                <select asp-for="Input.BloodGroup" asp-items="Html.GetEnumSelectList<KalamYouthForumWebApp.Models.BloodGroupList>()" class="form-control">
+                    <option>Please select one</option>
+                </select>
+                <span asp-validation-for="Input.BloodGroup" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.BloodDonation"></label>
+                <select asp-for="Input.BloodDonation" class="form-control">
+                    <option>Please select one</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+                <span asp-validation-for="Input.BloodDonation" class="text-danger"></span>
+            </div>
             <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>

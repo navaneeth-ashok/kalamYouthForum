@@ -58,6 +58,16 @@
             </div>
 
             <div class="form-group">
+                <label asp-for="Input.BloodDonation"></label>
+                <select asp-for="Input.BloodDonation" class="form-control">
+                    <option>Please select one</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+                <span asp-validation-for="Input.BloodDonation" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
                 <label asp-for="Input.Email"></label>
                 <input asp-for="Input.Email" class="form-control" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>

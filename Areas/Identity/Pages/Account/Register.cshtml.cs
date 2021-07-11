@@ -15,7 +15,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using KalamYouthForumWebApp.Models;
 
 namespace KalamYouthForumWebApp.Areas.Identity.Pages.Account
 {
@@ -104,6 +103,10 @@ namespace KalamYouthForumWebApp.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
+            [Required]
+            [Display(Name = "SignUp for Blood Donation?")]
+            public bool BloodDonation { get; set; }
+
         }
 
         //public enum GenderList
@@ -157,7 +160,8 @@ namespace KalamYouthForumWebApp.Areas.Identity.Pages.Account
                     District = Input.District,
                     State = Input.State,
                     Gender = Input.Gender,
-                    BloodGroup = Input.BloodGroup
+                    BloodGroup = Input.BloodGroup,
+                    BloodDonation = Input.BloodDonation
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)

@@ -1,0 +1,97 @@
+﻿@model IEnumerable<KalamYouthForumWebApp.Models.DonorDTO>
+
+@{
+    ViewData["Title"] = "Blood Donors List";
+}
+
+
+<div class="registration-card blood-form mt-5">
+    <h1 class="text-center" style="color:#003844">Blood Donors List</h1>
+    <hr />
+    <form action="/BloodDonation/Index" method="get">
+        <div class="container">
+            <div class="row mb-3">
+                <div class="col form-floating">
+                    <input type="text" class="form-control" name="State" placeholder="State" value="@(ViewContext.RouteData.Values["State"])">
+                    <label for="floatingInput">State</label>
+                </div>
+                <div class="col form-floating">
+                    <input type="text" class="form-control" name="District" placeholder="District" value="@(ViewContext.RouteData.Values["District"])">
+                    <label for="floatingPassword">District</label>
+                </div>
+            </div>
+            <div class="ms-auto me-auto text-center">
+                <button class="btn btn-search" type="submit">Search</button>
+            </div>
+        </div>
+
+    </form>
+    @if (Model.ToList().Count() > 0)
+    {
+        <table class="table table-borderless table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BloodGroup)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.District)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.State)
+                    </th>
+                    <th>
+                        @Html.Encode("Phone Number")
+                    </th>
+                    <th>
+                        @Html.Encode("Other Number")
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BloodGroup)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.District)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.State)
+                        </td>
+                        <td>
+                            <a class="blood-donation__phone" href="tel:@Html.DisplayFor(modelItem => item.Phone1)">@Html.DisplayFor(modelItem => item.Phone1)</a>
+                        </td>
+                        <td>
+                            <a class="blood-donation__phone" href="tel:@Html.DisplayFor(modelItem => item.Phone2)">@Html.DisplayFor(modelItem => item.Phone2)</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="text-center mt-3">
+            <p>No donor found in the given state and district.</p>
+            <p>Please search again with the state only for more results.</p>
+        </div>
+    }
+    <div class="donor-info text-center">
+        <hr />
+        <p>You can be part of this initiative by registering here <p>
+        <a href="/Identity/Account/Register" class="btn btn-success" style="margin:0">Register</a>
+    </div>
+
+
+</div>
+

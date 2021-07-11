@@ -36,18 +36,46 @@ namespace KalamYouthForumWebApp.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            [StringLength(50, ErrorMessage = "Please add the local body name", MinimumLength = 1)]
+            [Display(Name = "Local Body")]
+            public string LocalBody { get; set; }
+
+            [StringLength(50, ErrorMessage = "Please add the District name", MinimumLength = 1)]
+            [Display(Name = "District")]
+            public string District { get; set; }
+
+            [StringLength(50, ErrorMessage = "Please add the State name", MinimumLength = 1)]
+            [Display(Name = "State")]
+            public string State { get; set; }
+
+            [Display(Name = "SignUp for Blood Donation?")]
+            public bool BloodDonation { get; set; }
+
+            [Display(Name = "Blood Group")]
+            public BloodGroupList BloodGroup { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var district = user.District;
+            var state = user.State;
+            var localBody = user.LocalBody;
+            var bloodDonation = user.BloodDonation;
+            var bloodGroup = user.BloodGroup;
 
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                LocalBody = localBody,
+                District = district,
+                State = state,
+                BloodDonation = bloodDonation,
+                BloodGroup = bloodGroup
             };
         }
 
@@ -87,6 +115,33 @@ namespace KalamYouthForumWebApp.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
+
+            if(Input.District != user.District)
+            {
+                user.District = Input.District;
+            }
+
+            if (Input.LocalBody != user.LocalBody)
+            {
+                user.LocalBody = Input.LocalBody;
+            }
+
+            if (Input.State != user.State)
+            {
+                user.State = Input.State;
+            }
+
+            if (Input.BloodDonation != user.BloodDonation)
+            {
+                user.BloodDonation = Input.BloodDonation;
+            }
+
+            if (Input.BloodGroup != user.BloodGroup)
+            {
+                user.BloodGroup = Input.BloodGroup;
+            }
+
+            await _userManager.UpdateAsync(user);
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

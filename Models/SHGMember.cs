@@ -69,4 +69,15 @@ namespace KalamYouthForumWebApp.Models
         public int SHEId { get; set; }
         public virtual SHEModel SHEModel { get; set; }
     }
+
+    public class DonorDTO
+    {
+        public string Name { get; set; }
+        public string Phone1 { get; set; }
+        public string Phone2 { get; set; }
+        public string District { get; set; }
+        public string State { get; set; }
+        public BloodGroupList BloodGroup { get; set; }
+        
+    }
 }

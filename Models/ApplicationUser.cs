@@ -23,6 +23,9 @@ namespace KalamYouthForumWebApp.Models
         public GenderList Gender { get; set; }
 
         public BloodGroupList BloodGroup { get; set; }
+
+        [Display(Name = "SignUp for Blood Donation?")]
+        public bool BloodDonation { get; set; }
     }
 
     public enum GenderList
