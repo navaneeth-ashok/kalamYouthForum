@@ -577,4 +577,55 @@ a.blood-donation__phone:hover{
         margin-top: 40px;
     }
 
+    .blood-form .container {
+        width: 80%;
+    }
+
+    .blood-donation-table thead{
+        display: none;
+    }
+
+    .blood-donation-table tr {
+        display: block;
+        margin-bottom: 1.5rem;
+        padding: 1rem 0.5rem 0.5rem 1rem;
+        background-color: whitesmoke;
+        box-shadow: 0 0 1rem grey;
+        border-radius: 10px;
+    }
+
+    .blood-donation-table td {
+        display: block;
+        padding: 0.5rem;
+        text-align: left;
+    }
+
+    .blood-donation-table td:before {
+        float: left;
+        padding-right: 10px;
+        font-weight: bold;
+        background: whitesmoke;
+        color: #003844;
+    }
+
+    .blood-donation-table td:nth-child(1):before {
+        content: "Name: ";
+    }
+
+    .blood-donation-table td:nth-child(2):before {
+        content: "Blood Group: ";
+    }
+    .blood-donation-table td:nth-child(3):before {
+        content: "District: ";
+    }
+    .blood-donation-table td:nth-child(4):before {
+        content: "State: ";
+    }
+    .blood-donation-table td:nth-child(5):before {
+        content: "Contact Number: ";
+    }
+    .blood-donation-table td:nth-child(6):before {
+        content: "Alternate Number: ";
+    }
+
 }

@@ -487,6 +487,48 @@ footer input[type=image]:hover{
 
 }*/
 
+/*Blood Donation Form*/
+div.form-group{
+    margin-bottom: 10px;
+}
+
+a.blood-donation__phone{
+    color: #003844;
+    font-weight: bolder;
+    text-decoration: none;
+    transition: all 0.2s ease-in;
+}
+
+a.blood-donation__phone:hover{
+    color: #016f86;
+    text-decoration: underline;
+}
+
+.blood-form .container{
+    width: 30%;
+}
+
+.blood-form label {
+    padding-left: 20px;
+}
+
+.blood-form input{
+    font-family: inherit;
+}
+
+.blood-form .btn-search {
+    margin: 0 auto;
+    text-align: center;
+    background-color: #01809b;
+    border: none;
+    color: white;
+    font-weight: bold;
+}
+
+.blood-form .btn:hover {
+    background-color: #003844;
+}
+
 @media only screen and (max-width: 992px) {
     #footer-donate {
         margin-top: 20px;

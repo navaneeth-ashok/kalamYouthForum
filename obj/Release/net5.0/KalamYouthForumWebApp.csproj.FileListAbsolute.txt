@@ -499,3 +499,5 @@ C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Release\net5.0\ref\Kal
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Release\net5.0\KalamYouthForumWebApp.pdb
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Release\net5.0\KalamYouthForumWebApp.genruntimeconfig.cache
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Release\net5.0\Razor\Views\Home\Registration.cshtml.g.cs
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Release\net5.0\Razor\Areas\Identity\Pages\Account\Manage\EnableAuthenticator.cshtml.g.cs
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Release\net5.0\Razor\Views\BloodDonation\Index.cshtml.g.cs

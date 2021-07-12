@@ -1020,3 +1020,66 @@ GO
 COMMIT;
 GO
 
+BEGIN TRANSACTION;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210710194003_SHGMemberStateDistrict')
+BEGIN
+    ALTER TABLE [shgMembers] ADD [District] nvarchar(100) NOT NULL DEFAULT N'';
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210710194003_SHGMemberStateDistrict')
+BEGIN
+    ALTER TABLE [shgMembers] ADD [State] nvarchar(100) NOT NULL DEFAULT N'';
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210710194003_SHGMemberStateDistrict')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20210710194003_SHGMemberStateDistrict', N'5.0.7');
+END;
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210710200206_SHGMemberDonationConfirm')
+BEGIN
+    ALTER TABLE [shgMembers] ADD [BloodDonation] bit NOT NULL DEFAULT CAST(0 AS bit);
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210710200206_SHGMemberDonationConfirm')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20210710200206_SHGMemberDonationConfirm', N'5.0.7');
+END;
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210711020139_user-table-blood-confirm')
+BEGIN
+    ALTER TABLE [AspNetUsers] ADD [BloodDonation] bit NOT NULL DEFAULT CAST(0 AS bit);
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210711020139_user-table-blood-confirm')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20210711020139_user-table-blood-confirm', N'5.0.7');
+END;
+GO
+
+COMMIT;
+GO
+
