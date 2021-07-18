@@ -44,7 +44,10 @@ namespace KalamYouthForumWebApp.Controllers
             var shesBelongToUser = await _context.sheModels.Where(r => shgXUsers.Contains(r.SHEId)).ToListAsync();
             var fullSHGList = shes.Concat(shesBelongToUser).ToList();
             
-            
+            if((await userManager.IsInRoleAsync(user, "Admin")) || (await userManager.IsInRoleAsync(user, "Moderator"))){
+                fullSHGList = await _context.sheModels.ToListAsync();
+            }
+
             //var shes = await _context.sheModels.ToListAsync();
             List<SHEChapter> sheChapters = new List<SHEChapter>();
             foreach (var she in fullSHGList)
@@ -95,7 +98,10 @@ namespace KalamYouthForumWebApp.Controllers
             var UsersSHGIDs = _context.UserXSHGs.Where(a => a.UserID == user.Id).Select(u => u.SHGID).ToList();
             var usersChaptersIDs = await _context.chapterModels.Where(r => chapterXUsers.Contains(r.ChapterID)).Select(a => a.ChapterID).ToListAsync();
             var UserChapterSHGID = _context.sheModels.Where(i => i.ChapterModels.Any(p => usersChaptersIDs.Contains(p.ChapterID))).Select(a => a.SHEId).ToList();
-            if (!UsersSHGIDs.Contains(Convert.ToInt32(id)) && !UserChapterSHGID.Contains(Convert.ToInt32(id)))
+            if (!UsersSHGIDs.Contains(Convert.ToInt32(id)) 
+                && !UserChapterSHGID.Contains(Convert.ToInt32(id))
+                && !(await userManager.IsInRoleAsync(user, "Admin"))
+                && !(await userManager.IsInRoleAsync(user, "Moderator")))
             {
                 return NotFound();
             }
@@ -307,7 +313,10 @@ namespace KalamYouthForumWebApp.Controllers
             var UsersSHGIDs = _context.UserXSHGs.Where(a => a.UserID == user.Id).Select(u => u.SHGID).ToList();
             var usersChaptersIDs = await _context.chapterModels.Where(r => chapterXUsers.Contains(r.ChapterID)).Select(a => a.ChapterID).ToListAsync();
             var UserChapterSHGID = _context.sheModels.Where(i => i.ChapterModels.Any(p => usersChaptersIDs.Contains(p.ChapterID))).Select(a => a.SHEId).ToList();
-            if (!UsersSHGIDs.Contains(Convert.ToInt32(id)) && !UserChapterSHGID.Contains(Convert.ToInt32(id)))
+            if (!UsersSHGIDs.Contains(Convert.ToInt32(id)) 
+                && !UserChapterSHGID.Contains(Convert.ToInt32(id))
+                && !(await userManager.IsInRoleAsync(user, "Admin"))
+                && !(await userManager.IsInRoleAsync(user, "Moderator")))
             {
                 return NotFound();
             }
@@ -337,7 +346,10 @@ namespace KalamYouthForumWebApp.Controllers
             var UsersSHGIDs = _context.UserXSHGs.Where(a => a.UserID == user.Id).Select(u => u.SHGID).ToList();
             var usersChaptersIDs = await _context.chapterModels.Where(r => chapterXUsers.Contains(r.ChapterID)).Select(a => a.ChapterID).ToListAsync();
             var UserChapterSHGID = _context.sheModels.Where(i => i.ChapterModels.Any(p => usersChaptersIDs.Contains(p.ChapterID))).Select(a => a.SHEId).ToList();
-            if (!UsersSHGIDs.Contains(Convert.ToInt32(id)) && !UserChapterSHGID.Contains(Convert.ToInt32(id)))
+            if (!UsersSHGIDs.Contains(Convert.ToInt32(id)) 
+                && !UserChapterSHGID.Contains(Convert.ToInt32(id))
+                && !(await userManager.IsInRoleAsync(user, "Admin"))
+                && !(await userManager.IsInRoleAsync(user, "Moderator")))
             {
                 return NotFound();
             }
@@ -378,7 +390,10 @@ namespace KalamYouthForumWebApp.Controllers
             var UsersSHGIDs = _context.UserXSHGs.Where(a => a.UserID == user.Id).Select(u => u.SHGID).ToList();
             var usersChaptersIDs = await _context.chapterModels.Where(r => chapterXUsers.Contains(r.ChapterID)).Select(a => a.ChapterID).ToListAsync();
             var UserChapterSHGID = _context.sheModels.Where(i => i.ChapterModels.Any(p => usersChaptersIDs.Contains(p.ChapterID))).Select(a => a.SHEId).ToList();
-            if (!UsersSHGIDs.Contains(Convert.ToInt32(id)) && !UserChapterSHGID.Contains(Convert.ToInt32(id)))
+            if (!UsersSHGIDs.Contains(Convert.ToInt32(id)) 
+                && !UserChapterSHGID.Contains(Convert.ToInt32(id))
+                && !(await userManager.IsInRoleAsync(user, "Admin"))
+                && !(await userManager.IsInRoleAsync(user, "Moderator")))
             {
                 return NotFound();
             }
@@ -404,7 +419,10 @@ namespace KalamYouthForumWebApp.Controllers
             var UsersSHGIDs = _context.UserXSHGs.Where(a => a.UserID == user.Id).Select(u => u.SHGID).ToList();
             var usersChaptersIDs = await _context.chapterModels.Where(r => chapterXUsers.Contains(r.ChapterID)).Select(a => a.ChapterID).ToListAsync();
             var UserChapterSHGID = _context.sheModels.Where(i => i.ChapterModels.Any(p => usersChaptersIDs.Contains(p.ChapterID))).Select(a => a.SHEId).ToList();
-            if (!UsersSHGIDs.Contains(Convert.ToInt32(id)) && !UserChapterSHGID.Contains(Convert.ToInt32(id)))
+            if (!UsersSHGIDs.Contains(Convert.ToInt32(id)) 
+                && !UserChapterSHGID.Contains(Convert.ToInt32(id))
+                && !(await userManager.IsInRoleAsync(user, "Admin"))
+                && !(await userManager.IsInRoleAsync(user, "Moderator")))
             {
                 return NotFound();
             }

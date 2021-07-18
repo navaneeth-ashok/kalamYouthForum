@@ -30,7 +30,14 @@ namespace KalamYouthForumWebApp.Controllers
         {
             var user = await userManager.GetUserAsync(HttpContext.User);
             var chapterXUsers = _context.UserXChapters.Where(a => a.UserID == user.Id).Select( u => u.ChapterID).ToList();
-            IEnumerable<ChapterModel> chapterModels = await _context.chapterModels.Where(r => chapterXUsers.Contains(r.ChapterID)).ToListAsync();
+            IEnumerable<ChapterModel> chapterModels = new List<ChapterModel>();
+            if ((await userManager.IsInRoleAsync(user, "Admin")) || (await userManager.IsInRoleAsync(user, "Moderator")))
+            {
+                chapterModels = await _context.chapterModels.ToListAsync();
+            } else
+            {
+                chapterModels = await _context.chapterModels.Where(r => chapterXUsers.Contains(r.ChapterID)).ToListAsync();
+            }
             return View(chapterModels);
         }
 
@@ -44,7 +51,9 @@ namespace KalamYouthForumWebApp.Controllers
             }
             var user = await userManager.GetUserAsync(HttpContext.User);
             var UsersChapterIDs = _context.UserXChapters.Where(a => a.UserID == user.Id).Select(u => u.ChapterID).ToList();
-            if (!UsersChapterIDs.Contains(Convert.ToInt32(id)))
+            if (!UsersChapterIDs.Contains(Convert.ToInt32(id))
+                && !(await userManager.IsInRoleAsync(user, "Admin"))
+                && !(await userManager.IsInRoleAsync(user, "Moderator")))
             {
                 return NotFound();
             }
@@ -101,7 +110,9 @@ namespace KalamYouthForumWebApp.Controllers
             }
             var user = await userManager.GetUserAsync(HttpContext.User);
             var UsersChapterIDs = _context.UserXChapters.Where(a => a.UserID == user.Id).Select(u => u.ChapterID).ToList();
-            if (!UsersChapterIDs.Contains(Convert.ToInt32(id)))
+            if (!UsersChapterIDs.Contains(Convert.ToInt32(id)) 
+                && !(await userManager.IsInRoleAsync(user, "Admin"))
+                && !(await userManager.IsInRoleAsync(user, "Moderator")))
             {
                 return NotFound();
             }
@@ -128,7 +139,9 @@ namespace KalamYouthForumWebApp.Controllers
             }
             var user = await userManager.GetUserAsync(HttpContext.User);
             var UsersChapterIDs = _context.UserXChapters.Where(a => a.UserID == user.Id).Select(u => u.ChapterID).ToList();
-            if (!UsersChapterIDs.Contains(Convert.ToInt32(id)))
+            if (!UsersChapterIDs.Contains(Convert.ToInt32(id)) 
+                && !(await userManager.IsInRoleAsync(user, "Admin"))
+                && !(await userManager.IsInRoleAsync(user, "Moderator")))
             {
                 return NotFound();
             }
