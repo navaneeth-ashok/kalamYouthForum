@@ -9,7 +9,7 @@
 @*<p>
         <a asp-action="Create">Create New</a>
     </p>*@
-<table class="table">
+<table class="table" id="shg-index">
     <thead>
         <tr>
             <th>
@@ -107,3 +107,8 @@
         }
     </tbody>
 </table>
+<script>
+    $(document).ready(function () {
+        $('#shg-index').DataTable();
+    });
+</script>

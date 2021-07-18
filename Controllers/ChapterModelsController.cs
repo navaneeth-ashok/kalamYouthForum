@@ -9,23 +9,29 @@ using KalamYouthForumWebApp.Data;
 using KalamYouthForumWebApp.Models;
 using KalamYouthForumWebApp.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace KalamYouthForumWebApp.Controllers
 {
     public class ChapterModelsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public ChapterModelsController(ApplicationDbContext context)
+        public ChapterModelsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            this.userManager = userManager;
         }
 
         [Authorize(Roles = "Admin, Moderator, Chapter")]
         // GET: ChapterModels
         public async Task<IActionResult> Index()
         {
-            return View(await _context.chapterModels.ToListAsync());
+            var user = await userManager.GetUserAsync(HttpContext.User);
+            var chapterXUsers = _context.UserXChapters.Where(a => a.UserID == user.Id).Select( u => u.ChapterID).ToList();
+            IEnumerable<ChapterModel> chapterModels = await _context.chapterModels.Where(r => chapterXUsers.Contains(r.ChapterID)).ToListAsync();
+            return View(chapterModels);
         }
 
         [Authorize(Roles = "Admin, Moderator, Chapter")]
@@ -36,7 +42,12 @@ namespace KalamYouthForumWebApp.Controllers
             {
                 return NotFound();
             }
-
+            var user = await userManager.GetUserAsync(HttpContext.User);
+            var UsersChapterIDs = _context.UserXChapters.Where(a => a.UserID == user.Id).Select(u => u.ChapterID).ToList();
+            if (!UsersChapterIDs.Contains(Convert.ToInt32(id)))
+            {
+                return NotFound();
+            }
             var chapterModel = await _context.chapterModels
                 .FirstOrDefaultAsync(m => m.ChapterID == id);
 
@@ -88,6 +99,12 @@ namespace KalamYouthForumWebApp.Controllers
             {
                 return NotFound();
             }
+            var user = await userManager.GetUserAsync(HttpContext.User);
+            var UsersChapterIDs = _context.UserXChapters.Where(a => a.UserID == user.Id).Select(u => u.ChapterID).ToList();
+            if (!UsersChapterIDs.Contains(Convert.ToInt32(id)))
+            {
+                return NotFound();
+            }
 
             var chapterModel = await _context.chapterModels.FindAsync(id);
             if (chapterModel == null)
@@ -106,6 +123,12 @@ namespace KalamYouthForumWebApp.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("ChapterID,ChapterName,Panchayat,Muncipality,Taluk,Constituency,OfficeAddress")] ChapterModel chapterModel)
         {
             if (id != chapterModel.ChapterID)
+            {
+                return NotFound();
+            }
+            var user = await userManager.GetUserAsync(HttpContext.User);
+            var UsersChapterIDs = _context.UserXChapters.Where(a => a.UserID == user.Id).Select(u => u.ChapterID).ToList();
+            if (!UsersChapterIDs.Contains(Convert.ToInt32(id)))
             {
                 return NotFound();
             }
@@ -134,13 +157,14 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // GET: ChapterModels/Delete/5
-        [Authorize(Roles = "Admin, Moderator, Chapter")]
+        [Authorize(Roles = "Admin, Moderator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
+
 
             var chapterModel = await _context.chapterModels
                 .FirstOrDefaultAsync(m => m.ChapterID == id);
@@ -153,7 +177,7 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // POST: ChapterModels/Delete/5
-        [Authorize(Roles = "Admin, Moderator, Chapter")]
+        [Authorize(Roles = "Admin, Moderator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

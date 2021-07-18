@@ -9,46 +9,50 @@ using KalamYouthForumWebApp.Data;
 using KalamYouthForumWebApp.Models;
 using KalamYouthForumWebApp.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace KalamYouthForumWebApp.Controllers
 {
     public class SHEController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public SHEController(ApplicationDbContext context)
+        public SHEController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            this.userManager = userManager;
         }
 
         [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
         // GET: SHE
         public async Task<IActionResult> Index()
         {
-            //var SHEs = await _context.sheModels.ToListAsync();
-            //List<SHEChapter> sheChapters = new List<SHEChapter>();
-            //foreach(var she in SHEs)
-            //{
-            //    ChapterModel SelectedChapter = _context.chapterModels.Include(c => c.SHEModels).Where(b => b.SHEModels;
-
-            //    var model = new SHEChapter
-            //    {
-            //        Chapter = SelectedChapter,
-            //        SHEModel = she
-            //    };
-            //    sheChapters.Add(model);
-            //}
-            ////return View(await _context.sheModels.ToListAsync());
-            //return View(sheChapters);
-            var chapters = await _context.chapterModels.ToListAsync();
-            var shes = await _context.sheModels.ToListAsync();
+            var user = await userManager.GetUserAsync(HttpContext.User);
+            var chapterXUsers = _context.UserXChapters.Where(a => a.UserID == user.Id).Select(u => u.ChapterID).ToList();
+            var chapters = await _context.chapterModels.Where(r => chapterXUsers.Contains(r.ChapterID)).ToListAsync();
+            var usersChaptersIDs = await _context.chapterModels.Where(r => chapterXUsers.Contains(r.ChapterID)).Select(a => a.ChapterID).ToListAsync();
+            // if user is present in the chapter, show all the SHG inside the chapter
+            List<SHEModel> shes = new List<SHEModel>();
+            if(usersChaptersIDs.Count > 0)
+            {
+                shes = _context.sheModels.Where(i => i.ChapterModels.Any(p => usersChaptersIDs.Contains(p.ChapterID))).ToList();
+            } 
+            
+            // Now add SHGs the user is part of
+            var shgXUsers = _context.UserXSHGs.Where(a => a.UserID == user.Id).Select(u => u.SHGID).ToList();
+            var shesBelongToUser = await _context.sheModels.Where(r => shgXUsers.Contains(r.SHEId)).ToListAsync();
+            var fullSHGList = shes.Concat(shesBelongToUser).ToList();
+            
+            
+            //var shes = await _context.sheModels.ToListAsync();
             List<SHEChapter> sheChapters = new List<SHEChapter>();
-            foreach (var she in shes)
+            foreach (var she in fullSHGList)
             {
                 SHEModel sheModel = _context.sheModels.Include(c => c.ChapterModels).Where(a => a.SHEId == she.SHEId).FirstOrDefault();
-                System.Diagnostics.Debug.WriteLine(she.SHEName);
-                System.Diagnostics.Debug.WriteLine(she.ChapterModels.First().ChapterID);
-                System.Diagnostics.Debug.WriteLine(she.ChapterModels.First().ChapterName);
+                //System.Diagnostics.Debug.WriteLine(she.SHEName);
+                //System.Diagnostics.Debug.WriteLine(she.ChapterModels.First().ChapterID);
+                //System.Diagnostics.Debug.WriteLine(she.ChapterModels.First().ChapterName);
                 // because an SHG is part of one chapter only, retrieve the Chapter associated with it
                 // and send to view
                 ChapterModel chapterModel = she.ChapterModels.FirstOrDefault();
@@ -83,6 +87,15 @@ namespace KalamYouthForumWebApp.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
+            {
+                return NotFound();
+            }
+            var user = await userManager.GetUserAsync(HttpContext.User);
+            var chapterXUsers = _context.UserXChapters.Where(a => a.UserID == user.Id).Select(u => u.ChapterID).ToList();
+            var UsersSHGIDs = _context.UserXSHGs.Where(a => a.UserID == user.Id).Select(u => u.SHGID).ToList();
+            var usersChaptersIDs = await _context.chapterModels.Where(r => chapterXUsers.Contains(r.ChapterID)).Select(a => a.ChapterID).ToListAsync();
+            var UserChapterSHGID = _context.sheModels.Where(i => i.ChapterModels.Any(p => usersChaptersIDs.Contains(p.ChapterID))).Select(a => a.SHEId).ToList();
+            if (!UsersSHGIDs.Contains(Convert.ToInt32(id)) && !UserChapterSHGID.Contains(Convert.ToInt32(id)))
             {
                 return NotFound();
             }
@@ -124,7 +137,7 @@ namespace KalamYouthForumWebApp.Controllers
         //{
         //    return View();
         //}
-        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
+        [Authorize(Roles = "Admin, Moderator, Chapter")]
         [HttpPost]
         public IActionResult Create(int chapterID)
         {
@@ -135,7 +148,7 @@ namespace KalamYouthForumWebApp.Controllers
         // POST: SHE/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
+        [Authorize(Roles = "Admin, Moderator, Chapter")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateSHE([Bind("SHEId,SHEName,DateOfFormation,NumberOfMembers,ElectedPresident,PresidentEmail,PresidentPhoneNumber,ElectedSecretary,SecretaryEmail,SecretaryPhoneNumber,ElectedTreasurer,TreasurerEmail,TreasurerPhoneNumber")] SHEModel sHEModel, int chapterID)
@@ -289,6 +302,15 @@ namespace KalamYouthForumWebApp.Controllers
             {
                 return NotFound();
             }
+            var user = await userManager.GetUserAsync(HttpContext.User);
+            var chapterXUsers = _context.UserXChapters.Where(a => a.UserID == user.Id).Select(u => u.ChapterID).ToList();
+            var UsersSHGIDs = _context.UserXSHGs.Where(a => a.UserID == user.Id).Select(u => u.SHGID).ToList();
+            var usersChaptersIDs = await _context.chapterModels.Where(r => chapterXUsers.Contains(r.ChapterID)).Select(a => a.ChapterID).ToListAsync();
+            var UserChapterSHGID = _context.sheModels.Where(i => i.ChapterModels.Any(p => usersChaptersIDs.Contains(p.ChapterID))).Select(a => a.SHEId).ToList();
+            if (!UsersSHGIDs.Contains(Convert.ToInt32(id)) && !UserChapterSHGID.Contains(Convert.ToInt32(id)))
+            {
+                return NotFound();
+            }
 
             var sHEModel = await _context.sheModels.FindAsync(id);
             if (sHEModel == null)
@@ -307,6 +329,15 @@ namespace KalamYouthForumWebApp.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("SHEId,SHEName,DateOfFormation,NumberOfMembers,ElectedPresident,PresidentEmail,PresidentPhoneNumber,ElectedSecretary,SecretaryEmail,SecretaryPhoneNumber,ElectedTreasurer,TreasurerEmail,TreasurerPhoneNumber")] SHEModel sHEModel)
         {
             if (id != sHEModel.SHEId)
+            {
+                return NotFound();
+            }
+            var user = await userManager.GetUserAsync(HttpContext.User);
+            var chapterXUsers = _context.UserXChapters.Where(a => a.UserID == user.Id).Select(u => u.ChapterID).ToList();
+            var UsersSHGIDs = _context.UserXSHGs.Where(a => a.UserID == user.Id).Select(u => u.SHGID).ToList();
+            var usersChaptersIDs = await _context.chapterModels.Where(r => chapterXUsers.Contains(r.ChapterID)).Select(a => a.ChapterID).ToListAsync();
+            var UserChapterSHGID = _context.sheModels.Where(i => i.ChapterModels.Any(p => usersChaptersIDs.Contains(p.ChapterID))).Select(a => a.SHEId).ToList();
+            if (!UsersSHGIDs.Contains(Convert.ToInt32(id)) && !UserChapterSHGID.Contains(Convert.ToInt32(id)))
             {
                 return NotFound();
             }
@@ -335,10 +366,19 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // GET: SHE/Delete/5
-        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
+        [Authorize(Roles = "Admin, Moderator, Chapter")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
+            {
+                return NotFound();
+            }
+            var user = await userManager.GetUserAsync(HttpContext.User);
+            var chapterXUsers = _context.UserXChapters.Where(a => a.UserID == user.Id).Select(u => u.ChapterID).ToList();
+            var UsersSHGIDs = _context.UserXSHGs.Where(a => a.UserID == user.Id).Select(u => u.SHGID).ToList();
+            var usersChaptersIDs = await _context.chapterModels.Where(r => chapterXUsers.Contains(r.ChapterID)).Select(a => a.ChapterID).ToListAsync();
+            var UserChapterSHGID = _context.sheModels.Where(i => i.ChapterModels.Any(p => usersChaptersIDs.Contains(p.ChapterID))).Select(a => a.SHEId).ToList();
+            if (!UsersSHGIDs.Contains(Convert.ToInt32(id)) && !UserChapterSHGID.Contains(Convert.ToInt32(id)))
             {
                 return NotFound();
             }
@@ -354,11 +394,20 @@ namespace KalamYouthForumWebApp.Controllers
         }
 
         // POST: SHE/Delete/5
-        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
+        [Authorize(Roles = "Admin, Moderator, Chapter")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var user = await userManager.GetUserAsync(HttpContext.User);
+            var chapterXUsers = _context.UserXChapters.Where(a => a.UserID == user.Id).Select(u => u.ChapterID).ToList();
+            var UsersSHGIDs = _context.UserXSHGs.Where(a => a.UserID == user.Id).Select(u => u.SHGID).ToList();
+            var usersChaptersIDs = await _context.chapterModels.Where(r => chapterXUsers.Contains(r.ChapterID)).Select(a => a.ChapterID).ToListAsync();
+            var UserChapterSHGID = _context.sheModels.Where(i => i.ChapterModels.Any(p => usersChaptersIDs.Contains(p.ChapterID))).Select(a => a.SHEId).ToList();
+            if (!UsersSHGIDs.Contains(Convert.ToInt32(id)) && !UserChapterSHGID.Contains(Convert.ToInt32(id)))
+            {
+                return NotFound();
+            }
             var sHEModel = await _context.sheModels.FindAsync(id);
             _context.sheModels.Remove(sHEModel);
             await _context.SaveChangesAsync();
