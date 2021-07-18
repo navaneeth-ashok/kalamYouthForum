@@ -1,5 +1,4 @@
-﻿@model KalamYouthForumWebApp.Models.SHEModel
-
+﻿@model KalamYouthForumWebApp.Models.ViewModels.SHGMonthlyAccount
 @{
     ViewData["Title"] = "SHG Details";
 }
@@ -9,107 +8,154 @@
 <div>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SHEName)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SHEModel.SHEName)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SHEName)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SHEModel.SHEName)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateOfFormation)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SHEModel.DateOfFormation)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateOfFormation)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SHEModel.DateOfFormation)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumberOfMembers)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SHEModel.NumberOfMembers)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumberOfMembers)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SHEModel.NumberOfMembers)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ElectedPresident)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SHEModel.ElectedPresident)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ElectedPresident)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SHEModel.ElectedPresident)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PresidentEmail)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SHEModel.PresidentEmail)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PresidentEmail)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SHEModel.PresidentEmail)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PresidentPhoneNumber)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SHEModel.PresidentPhoneNumber)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PresidentPhoneNumber)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SHEModel.PresidentPhoneNumber)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ElectedSecretary)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SHEModel.ElectedSecretary)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ElectedSecretary)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SHEModel.ElectedSecretary)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SecretaryEmail)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SHEModel.SecretaryEmail)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SecretaryEmail)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SHEModel.SecretaryEmail)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SecretaryPhoneNumber)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SHEModel.SecretaryPhoneNumber)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SecretaryPhoneNumber)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SHEModel.SecretaryPhoneNumber)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ElectedTreasurer)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SHEModel.ElectedTreasurer)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ElectedTreasurer)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SHEModel.ElectedTreasurer)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TreasurerEmail)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SHEModel.TreasurerEmail)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TreasurerEmail)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SHEModel.TreasurerEmail)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TreasurerPhoneNumber)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SHEModel.TreasurerPhoneNumber)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TreasurerPhoneNumber)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SHEModel.TreasurerPhoneNumber)
         </dd>
     </dl>
-    <hr/>
+    <hr />
 </div>
 <div class="member-list">
-    <h4>List of SHG members</h4>
+    <h4>SHG members</h4>
     <form asp-action="AddMembers" asp-controller="SHE" method="post">
-        <input type="hidden" name="shgID" value="@Model.SHEId" />
+        <input type="hidden" name="shgID" value="@Model.SHEModel.SHEId" />
         <input type="submit" name="submit" class="btn btn-success" value="Add members" />
     </form>
     <form asp-action="ViewMembers" asp-controller="SHE" method="post">
-        <input type="hidden" name="shgID" value="@Model.SHEId" />
+        <input type="hidden" name="shgID" value="@Model.SHEModel.SHEId" />
         <input type="submit" name="submit" class="btn btn-danger" value="View all members" />
     </form>
     <hr />
 </div>
 <div class="expense_upload">
     <h4>Account Details and Monthly Expense Upload</h4>
-    <form asp-action="UploadImageDB"
-          asp-controller="Images"
-          method="post"
-          enctype="multipart/form-data">
-        <input type="file" id="file1"
-               name="file1"
-               multiple="multiple" class="btn btn-info" />
-        <input type="hidden" id="projectID" name="projectID" value=@Model.SHEId>
-        <button type="submit" class="btn btn-primary">Upload File(s)</button>
+    <form asp-action="AddExpenseReport" asp-controller="SHE" method="post" class="mb-3">
+        <input type="hidden" name="shgId" value="@Model.SHEModel.SHEId" />
+        <input type="submit" class="btn btn-primary" value="Add Report" />
     </form>
+    <table class="table table-bordered table-hover mt-5" id="document-table">
+        <thead>
+            <tr>
+                <th>Report Date</th>
+                <th>Document</th>
+                <th>Description</th>
+                <th>Total Amount</th>
+                <th>Uploaded By</th>
+                <th>Date of Upload</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ foreach (var documents in Model.MonthlyAccountDocument)
+                {
+                    <tr>
+                        <td>@documents.DateOfAccount.ToShortDateString()</td>
+                        <td>@documents.Name</td>
+                        <td>@documents.Description</td>
+                        <td>@documents.TotalAmount</td>
+                        <td>@documents.UploadedBy</td>
+                        <td>@documents.DateOfUpload</td>
+                        @*<td><a asp-controller="Document" asp-action="Download" asp-route-id="@documents.Id">Download</a></td>*@
+                        <td>
+                            <div class="container">
+                                <div class="row">
+                                    <form asp-controller="Document" asp-action="Download">
+                                        <input type="hidden" name="id" value="@documents.Id" />
+                                        <input type="submit" name="submit" value="Download" class="btn btn-outline-secondary" />
+                                    </form>
+                                </div>
+                                <div class="row">
+                                    <form asp-controller="Document" asp-action="Delete">
+                                        <input type="hidden" name="id" value="@documents.Id" />
+                                        <input type="hidden" name="shgID" value="@Model.SHEModel.SHEId" />
+                                        <input type="submit" name="submit" value="Delete" class="btn btn-outline-danger" />
+                                    </form>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <hr />
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.SHEId">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.SHEModel.SHEId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#document-table').DataTable();
+    });
+</script>

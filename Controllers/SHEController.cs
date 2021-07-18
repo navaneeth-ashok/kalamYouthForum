@@ -94,7 +94,29 @@ namespace KalamYouthForumWebApp.Controllers
                 return NotFound();
             }
 
-            return View(sHEModel);
+            List<int> IdsToSearch = new List<int>();
+            var documentIDs = _context.SHGMonthlyDocuments.Where(a => a.SHGId == id).ToList();
+            System.Diagnostics.Debug.WriteLine("#####################");
+            foreach ( var idEle in documentIDs)
+            {
+                IdsToSearch.Add(Convert.ToInt32(idEle.FileId));
+                System.Diagnostics.Debug.WriteLine(idEle.FileId);
+            }
+            System.Diagnostics.Debug.WriteLine("#####################");
+            System.Diagnostics.Debug.WriteLine(IdsToSearch);
+
+            IEnumerable<MonthlyAccountDocument> monthlyAccountDocuments = _context.MonthlyAccountDocuments.Where(r => IdsToSearch.Contains(r.Id)).ToList();
+
+            
+
+            SHGMonthlyAccount shgMonthlyAccount = new SHGMonthlyAccount
+            {
+                SHEModel = sHEModel,
+                MonthlyAccountDocument = monthlyAccountDocuments,
+            };
+
+
+            return View(shgMonthlyAccount);
         }
 
         // GET: SHE/Create
@@ -342,6 +364,17 @@ namespace KalamYouthForumWebApp.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddExpenseReport(int shgId)
+        {
+            ViewBag.shgID = shgId;
+            return View();
+        }
+
+
 
         private bool SHEModelExists(int id)
         {

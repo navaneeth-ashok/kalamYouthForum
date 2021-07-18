@@ -1,0 +1,33 @@
+﻿@model KalamYouthForumWebApp.Models.MonthlyAccountDocument
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h4>Start Uploading Files Here</h4>
+<hr />
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-success alert-dismissible" style="margin-top:20px">
+        @ViewBag.Message
+    </div>
+}
+<form method="post" enctype="multipart/form-data">
+    <input type="file" name="files" required />
+
+    <div class="form-group">
+        <label asp-for="@Model.TotalAmount"></label>
+        <input asp-for="@Model.TotalAmount" class="form-control" />
+        <span asp-validation-for="@Model.TotalAmount" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Description"></label>
+        <input asp-for="@Model.Description" class="form-control" />
+        <span asp-validation-for="@Model.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.DateOfAccount"></label>
+        <input asp-for="@Model.DateOfAccount" class="form-control" />
+        <span asp-validation-for="@Model.DateOfAccount" class="text-danger"></span>
+    </div>
+    <button class="btn btn-success" type="submit" asp-controller="DocumentUpload" asp-action="UploadToDatabase">Upload Document</button>
+</form>

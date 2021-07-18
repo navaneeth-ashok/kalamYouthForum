@@ -54,5 +54,7 @@ namespace KalamYouthForumWebApp.Models
         ABPositive,
         [Display(Name = "AB-")]
         ABNegative,
+        [Display(Name = "Bombay Blood Group")]
+        Bombay,
     }
 }

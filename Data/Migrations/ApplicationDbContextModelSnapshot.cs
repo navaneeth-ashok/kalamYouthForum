@@ -201,6 +201,46 @@ namespace KalamYouthForumWebApp.Data.Migrations
                     b.ToTable("Images");
                 });
 
+            modelBuilder.Entity("KalamYouthForumWebApp.Models.MonthlyAccountDocument", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<byte[]>("Content")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<DateTime>("DateOfAccount")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateOfUpload")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Extension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(20,2)");
+
+                    b.Property<string>("UploadedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MonthlyAccountDocuments");
+                });
+
             modelBuilder.Entity("KalamYouthForumWebApp.Models.NewsletterList", b =>
                 {
                     b.Property<int>("Id")
@@ -376,6 +416,28 @@ namespace KalamYouthForumWebApp.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RoleViewModel");
+                });
+
+            modelBuilder.Entity("KalamYouthForumWebApp.Models.ViewModels.SHGMonthlyDocument", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("FileId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SHGId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FileId");
+
+                    b.HasIndex("SHGId");
+
+                    b.ToTable("SHGMonthlyDocuments");
                 });
 
             modelBuilder.Entity("KalamYouthForumWebApp.Models.ViewModels.UserXChapter", b =>
@@ -596,6 +658,25 @@ namespace KalamYouthForumWebApp.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("SHEModel");
+                });
+
+            modelBuilder.Entity("KalamYouthForumWebApp.Models.ViewModels.SHGMonthlyDocument", b =>
+                {
+                    b.HasOne("KalamYouthForumWebApp.Models.MonthlyAccountDocument", "MonthlyAccountDocument")
+                        .WithMany()
+                        .HasForeignKey("FileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KalamYouthForumWebApp.Models.SHEModel", "SheModel")
+                        .WithMany()
+                        .HasForeignKey("SHGId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MonthlyAccountDocument");
+
+                    b.Navigation("SheModel");
                 });
 
             modelBuilder.Entity("KalamYouthForumWebApp.Models.ViewModels.UserXChapter", b =>

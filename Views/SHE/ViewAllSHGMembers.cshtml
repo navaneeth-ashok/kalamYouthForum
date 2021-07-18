@@ -6,7 +6,7 @@
 
 <h1>View All SHG Members</h1>
 
-<table class="table">
+<table class="table" id="shg-member-table">
     <thead>
         <tr>
             <th>
@@ -78,9 +78,9 @@
             <td>
                 <a asp-action="Details" asp-route-id="@item.SHEId">@Html.DisplayFor(modelItem => item.SHEId)</a>
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.SHEModel.SHEName)
-            </td>
+            </td>*@
             @*<td>
                 <a asp-action="Edit" asp-route-id="@item.SHGMemberId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.SHGMemberId">Details</a> |
@@ -90,3 +90,9 @@
 }
     </tbody>
 </table>
+
+<script>
+    $(document).ready(function () {
+        $('#shg-member-table').DataTable();
+    });
+</script>

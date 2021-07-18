@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "mssql1": {
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/kalamyouthforumwebappdbserver/databases/aspnet-KalamYouthForumWebApp",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/kalamyouthforumwebappdbserver/databases/aspnet-KalamYouthForumWebApp-Main",
       "type": "mssql.azure",
       "connectionId": "DefaultConnection",
       "secretStore": "AzureAppSettings"

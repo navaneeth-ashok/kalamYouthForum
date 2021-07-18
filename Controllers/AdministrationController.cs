@@ -71,7 +71,6 @@ namespace KalamYouthForumWebApp.Controllers
                 { 
                     userList.Add(user);
                 }
-                System.Diagnostics.Debug.WriteLine(user.Email);
             }
             var model = new RoleUserListViewModel
             {

@@ -497,7 +497,9 @@ C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Vie
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\NewsletterList\Index.cshtml.g.cs
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\SHE\DeleteMembersFromSHG.cshtml.g.cs
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\SHE\EditSHGMember.cshtml.g.cs
-C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\KalamYouthForumWebApp.csprojAssemblyReference.cache
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\Home\Registration.cshtml.g.cs
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\BloodDonation\Index.cshtml.g.cs
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\EnableAuthenticator.cshtml.g.cs
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\KalamYouthForumWebApp.csprojAssemblyReference.cache
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\DocumentUpload\Index.cshtml.g.cs
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\SHE\AddExpenseReport.cshtml.g.cs

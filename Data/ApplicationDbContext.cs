@@ -42,6 +42,11 @@ namespace KalamYouthForumWebApp.Data
         //add Newsletter User to DB
         public DbSet<NewsletterList> newsletterLists { get; set; }
 
+        //add MonthlyDocs to DB
+        public DbSet<MonthlyAccountDocument> MonthlyAccountDocuments { get; set; }
+
+        //add SHGMonthly to DB
+        public DbSet<SHGMonthlyDocument> SHGMonthlyDocuments { get; set; }
     }
 
 }
