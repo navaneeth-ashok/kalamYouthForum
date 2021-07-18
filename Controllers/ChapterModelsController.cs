@@ -95,6 +95,15 @@ namespace KalamYouthForumWebApp.Controllers
             {
                 _context.Add(chapterModel);
                 await _context.SaveChangesAsync();
+                // assign this chapter to the user automatically
+                UserChaptersController userChaptersController = new UserChaptersController(_context);
+                var user = await userManager.GetUserAsync(HttpContext.User);
+                UserXChapter userXChapter = new UserXChapter
+                {
+                    UserID = user.Id,
+                    ChapterID = chapterModel.ChapterID
+                };
+                await userChaptersController.Create(userXChapter);
                 return RedirectToAction(nameof(Index));
             }
             return View(chapterModel);
