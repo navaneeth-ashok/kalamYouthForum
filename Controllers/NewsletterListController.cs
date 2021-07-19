@@ -8,23 +8,52 @@ using Microsoft.EntityFrameworkCore;
 using KalamYouthForumWebApp.Data;
 using KalamYouthForumWebApp.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using KalamYouthForumWebApp.Models.ViewModels;
 
 namespace KalamYouthForumWebApp.Controllers
 {
     public class NewsletterListController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public NewsletterListController(ApplicationDbContext context)
+        public NewsletterListController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            this.userManager = userManager;
         }
 
         // GET: NewsletterList
         [Authorize(Roles = "Admin, Moderator")]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.newsletterLists.ToListAsync());
+            List<string> shgMembersEmail = await _context.shgMembers.Select(a => a.Email).ToListAsync();
+            List<string> registeredMembersEmail = await userManager.Users.Select(a => a.Email).ToListAsync();
+            List<string> newsletterUsersEmail = await _context.newsletterLists.Select(a => a.EmailID).ToListAsync();
+            List<NewsletterList> newsletterUsers = await _context.newsletterLists.ToListAsync();
+
+            List<string> concatenatedList = shgMembersEmail.Concat(registeredMembersEmail).Concat(newsletterUsersEmail).ToList();
+            string concatenatedString = string.Join(",", concatenatedList);
+            string commaSeperatedMailingListSHG = string.Join(",", shgMembersEmail);
+            string commaSeperatedMailingListRegistered = string.Join(",", registeredMembersEmail);
+            string commaSeperatedMailingListNewsLetter = string.Join(",", newsletterUsersEmail);
+
+            NewsletterCombined newsletterList = new NewsletterCombined
+            {
+                shgMembersEmail = shgMembersEmail,
+                registeredMembersEmail = registeredMembersEmail,
+                newsletterUsersEmail = newsletterUsers,
+                commaSeperatedMailingListSHG = commaSeperatedMailingListSHG,
+                commaSeperatedMailingListRegistered = commaSeperatedMailingListRegistered,
+                commaSeperatedMailingListNewsLetter = commaSeperatedMailingListNewsLetter,
+                commaSeperatedMailingList = concatenatedString,
+            };
+
+
+
+
+            return View(newsletterList);
         }
 
         // GET: NewsletterList/Details/5

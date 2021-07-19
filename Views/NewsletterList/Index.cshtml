@@ -1,4 +1,4 @@
-﻿@model IEnumerable<KalamYouthForumWebApp.Models.NewsletterList>
+﻿@model KalamYouthForumWebApp.Models.ViewModels.NewsletterCombined
 
 @{
     ViewData["Title"] = "EMail List";
@@ -9,27 +9,62 @@
 <p>
     <a asp-action="Create">Add New Email to the list</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.EmailID)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmailID)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+
+<div class="container email-list">
+    <div class="container">
+        <h2>Newsletter Subscribed Members Emails</h2>
+        <table class="table table-borderless">
+            <tbody>
+                @foreach (var item in Model.newsletterUsersEmail)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmailID)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <input type="text" readonly class="w-100 text-break" value="@Model.commaSeperatedMailingListNewsLetter" id="news"/><button onclick="copyEmail('news')" class="btn btn-outline-secondary btn-sm mt-0">Copy</button>
+    </div>
+    <div class="container mt-3">
+        <hr />
+        <h2>Registered Members Emails</h2>
+        @foreach (var registeredMember in Model.registeredMembersEmail)
+        {
+            <p><a href="mailto:@registeredMember">@registeredMember</a></p>
+        }
+        <input type="text" readonly class="w-100 text-break" value="@Model.commaSeperatedMailingListRegistered" id="reg"/><button onclick="copyEmail('reg')" class="btn btn-outline-secondary btn-sm mt-0">Copy</button>
+    </div>
+    <div class="container mt-3">
+        <hr />
+        <h2>SHG Members Emails</h2>
+        @foreach (var shgMember in Model.shgMembersEmail)
+        {
+            <p><a href="mailto:@shgMember">@shgMember</a></p>
+        }
+        <input type="text" readonly class="w-100 text-break" value="@Model.commaSeperatedMailingListSHG" id="shg" /><button onclick="copyEmail('shg')" class="btn btn-outline-secondary btn-sm mt-0">Copy</button>
+    </div>
+    <div class="container mt-3">
+        <hr />
+        <h3>Complete newsletter Email List</h3>
+        <input type="text" readonly class="w-100 text-break" value="@Model.commaSeperatedMailingList" id="full" /><button onclick="copyEmail('full')" class="btn btn-outline-secondary btn-sm mt-0">Copy</button>
+    </div>
+
+
+</div>
+
+<script>
+    function copyEmail(id) {
+        var copyText = document.getElementById(id);
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /* For mobile devices */
+        document.execCommand("copy");
+    }
+</script>
