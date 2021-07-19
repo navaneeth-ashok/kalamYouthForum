@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<KalamYouthForumWebApp.Models.ViewModels.ProjectImages>
-<h1>Projects</h1>
+<h1 style="color:#00667c">Projects</h1>
 <div class="container ms-auto me-auto project-list">
     <div class="input-group mb-3 mt-3">
-        <input type="text" class="form-control" placeholder="Search for Projects...." aria-label="Search for Projects" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+        <input type="text" class="form-control" placeholder="Search for Projects...." aria-label="Search for Projects" aria-describedby="button-addon2" id="search-input">
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="searchProjects()">Search</button>
     </div>
     <div class="row">
         @foreach (var projects in Model)
@@ -28,3 +28,24 @@
         }
     </div>
 </div>
+
+<script>
+    function searchProjects() {
+        const searchTerm = document.getElementById("search-input").value;
+        console.log(searchTerm);
+        let cards = document.getElementsByClassName("project-card");
+        for (card of cards) {
+            const heading = card.getElementsByTagName("h2")[0].innerText;
+            const desc = card.getElementsByClassName("project-info")[0].innerText;
+            if (heading.includes(searchTerm) || (desc.includes(searchTerm))) {
+                card.style.display = "inline-block";
+                if (searchTerm != "") {
+                    card.parentElement.classList.add("order-first");
+                }
+            } else {
+                card.style.display = "none";
+                card.parentElement.classList.remove("order-first");
+            }
+        }
+    }
+</script>
