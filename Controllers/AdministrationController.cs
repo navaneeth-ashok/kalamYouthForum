@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using KalamYouthForumWebApp.Data;
 using KalamYouthForumWebApp.Models;
 using Microsoft.AspNetCore.Authorization;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace KalamYouthForumWebApp.Controllers
 {
@@ -190,6 +192,23 @@ namespace KalamYouthForumWebApp.Controllers
 
             return RedirectToAction("Details", new { Id = roleId });
         }
+
+        [HttpGet]
+        public void SendConfirmationMail(string MessageToken, string Email, string UserName)
+        {
+            AuthMessageSenderOptions authMessageSenderOptions = new AuthMessageSenderOptions();
+            var client = new SendGridClient(authMessageSenderOptions.SendGridKey);
+            var from = new EmailAddress("kalamyouthforumdev@gmail.com", "Kalam Youth Forum");
+            var subject = "Kalam Youth Forum Account Registration";
+            var to = new EmailAddress(Email, UserName);
+            var plainTextContent = "and easy to do anywhere, even with C#";
+            var htmlContent = "<strong>and easy to do anywhere, even with C#</strong>";
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var response = client.SendEmailAsync(msg);
+            System.Diagnostics.Debug.WriteLine(response.Status);
+            System.Diagnostics.Debug.WriteLine(response.Result);
+        }
+
 
     }
 }

@@ -503,3 +503,6 @@ C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Are
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\KalamYouthForumWebApp.csprojAssemblyReference.cache
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\DocumentUpload\Index.cshtml.g.cs
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\SHE\AddExpenseReport.cshtml.g.cs
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\bin\Debug\net5.0\SendGrid.dll
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\bin\Debug\net5.0\StarkbankEcdsa.dll
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\RegisterConfirmation.cshtml.g.cs
