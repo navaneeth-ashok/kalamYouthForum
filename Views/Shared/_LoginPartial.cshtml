@@ -6,7 +6,7 @@
 {
 
 
-    @if (User.IsInRole("Admin") || User.IsInRole("Moderator") || User.IsInRole("Chapter") || User.IsInRole("SHGUser"))
+    @if (User.IsInRole("Admin") || User.IsInRole("Moderator") || User.IsInRole("Chapter") || User.IsInRole("SHGUser") || User.IsInRole("ProjectAdmin"))
     { 
         <li class="nav-item">
             <a class="nav-link text-light" asp-action="Index" asp-controller="Manage" title="Manage">Manage</a>

@@ -9,7 +9,7 @@ namespace KalamYouthForumWebApp.Controllers
 {
     public class ManageController : Controller
     {
-        [Authorize(Roles = "Admin, Moderator")]
+        [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser, PageAdmin")]
         public IActionResult Index()
         {
             return View();

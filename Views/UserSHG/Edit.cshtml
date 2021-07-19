@@ -6,7 +6,11 @@
 
 <h1>Edit</h1>
 
-<h4>UserXSHG</h4>
+<h4>User to SHG mapping</h4>
+<hr />
+<p>If no SHG is shown in the list, that means you are not assigned with any SHG.</p>
+<p>Please get access to a chapter or an SHG for assigning users to SHGs.</p>
+<p>Access will be given by Chapter Users or Administrators.</p>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -24,7 +28,14 @@
                 <span asp-validation-for="SHGID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                @if (ViewBag.SHGCount == 0)
+                {
+                    <input type="submit" value="Save" class="btn btn-primary" disabled />
+                }
+                else
+                {
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                }
             </div>
         </form>
     </div>

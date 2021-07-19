@@ -536,6 +536,15 @@ a.blood-donation__phone:hover{
     height: 29px;
 }
 
+h3, h2 {
+    color: #025061;
+}
+.email-list a {
+    text-decoration: none;
+}
+.email-list a:hover {
+    color: #025061;
+}
 @media only screen and (max-width: 992px) {
     #footer-donate {
         margin-top: 20px;
