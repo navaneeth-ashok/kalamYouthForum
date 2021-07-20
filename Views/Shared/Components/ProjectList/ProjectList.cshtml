@@ -10,8 +10,8 @@
             <a asp-controller="Projects" asp-action="ListProjects">View More-></a>
         </div>
     </div>
-    
-    
+
+
 </div>
 
 <div class="container-fluid mb-5 project-listing-card">
@@ -22,9 +22,15 @@
                 <div class="index-project-card">
                     <div class="container">
                         <div class="row">
-                            <div class="col-6">
-                                <img src="@projects.RelatedProjectImages.ToList()[0].ImageDataURL" width="100%"/>
-                            </div>
+
+                            @if (projects.RelatedProjectImages.ToList().Count > 0)
+                            {
+                                <div class="col-6">
+                                    <img src="@projects.RelatedProjectImages.ToList()[0].ImageDataURL" width="100%" />
+                                </div>
+                            }
+
+
                             <div class="col project-info">
                                 <h3>@projects.Project.Heading</h3>
                                 <p><a asp-controller="Projects" asp-action="View" asp-route-id="@projects.Project.ProjectIDKey">Read More</a></p>

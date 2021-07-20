@@ -1,0 +1,9 @@
+﻿
+@{
+    ViewData["Title"] = "Send Email Status";
+}
+
+<h1>Status of the newsletter email</h1>
+<p>@ViewBag.Message</p>
+<p>@ViewBag.Response</p>
+<a asp-action="Index" asp-controller="NewsLetterList" class="card-link btn btn-primary">Back to Newsletter Page</a>

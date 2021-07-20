@@ -41,12 +41,20 @@ namespace KalamYouthForumWebApp.Controllers
         [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int id, int shgID)
+        public async Task<IActionResult> Delete(int id, int? shgID, int? chapterID)
         {
             var file = await _context.MonthlyAccountDocuments.FindAsync(id);
             _context.MonthlyAccountDocuments.Remove(file);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Details", "SHE", new { id = shgID });
+            if (shgID != null)
+            {
+                return RedirectToAction("Details", "SHE", new { id = shgID });
+            }
+            if (chapterID != null)
+            {
+                return RedirectToAction("Details", "ChapterModels", new { id = chapterID });
+            }
+            return RedirectToAction("Index", "Manage");
         }
 
         [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
@@ -79,10 +87,18 @@ namespace KalamYouthForumWebApp.Controllers
                 if (shgID != null)
                 {
                     AssociateDocumentToSHE(fileModel.Id, Convert.ToInt32(shgID));
+                    TempData["Message"] = "File successfully uploaded to Database";
+                    return RedirectToAction("Details", "SHE", new { id = shgID });
+                }
+                if (chapterID != null)
+                {
+                    AssociateDocumentToChapter(fileModel.Id, Convert.ToInt32(chapterID));
+                    TempData["Message"] = "File successfully uploaded to Database";
+                    return RedirectToAction("Details", "ChapterModels", new { id = chapterID });
                 }
             }
-            TempData["Message"] = "File successfully uploaded to Database";
-            return RedirectToAction("Details", "SHE" , new { id = shgID });
+            return RedirectToAction("Index", "Manage");
+            
         }
 
         [Authorize(Roles = "Admin, Moderator, Chapter, SHGUser")]
@@ -95,6 +111,20 @@ namespace KalamYouthForumWebApp.Controllers
             };
 
             _context.Add(shgMonthlyDocument);
+            _context.SaveChanges();
+        }
+
+        [Authorize(Roles = "Admin, Moderator, Chapter")]
+        public void AssociateDocumentToChapter(int documentID, int chapterID)
+        {
+
+            ChapterMonthlyDocument chapterMonthlyDocument = new ChapterMonthlyDocument
+            {
+                ChapterID = chapterID,
+                FileId = documentID,
+            };
+
+            _context.Add(chapterMonthlyDocument);
             _context.SaveChanges();
         }
     }

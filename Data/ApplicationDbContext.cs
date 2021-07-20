@@ -47,6 +47,9 @@ namespace KalamYouthForumWebApp.Data
 
         //add SHGMonthly to DB
         public DbSet<SHGMonthlyDocument> SHGMonthlyDocuments { get; set; }
+
+        //add ChapterMonthly to DB
+        public DbSet<ChapterMonthlyDocument> ChapterMonthlyDocument { get; set; }
     }
 
 }

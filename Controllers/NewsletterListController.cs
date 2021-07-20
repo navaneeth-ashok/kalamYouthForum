@@ -10,6 +10,9 @@ using KalamYouthForumWebApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using KalamYouthForumWebApp.Models.ViewModels;
+using SendGrid;
+using SendGrid.Helpers.Mail;
+using Microsoft.Extensions.Hosting;
 
 namespace KalamYouthForumWebApp.Controllers
 {
@@ -17,11 +20,13 @@ namespace KalamYouthForumWebApp.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IHostEnvironment _hostEnvironment;
 
-        public NewsletterListController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public NewsletterListController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IHostEnvironment hostEnvironment)
         {
             _context = context;
             this.userManager = userManager;
+            _hostEnvironment = hostEnvironment;
         }
 
         // GET: NewsletterList
@@ -38,7 +43,7 @@ namespace KalamYouthForumWebApp.Controllers
             string commaSeperatedMailingListSHG = string.Join(",", shgMembersEmail);
             string commaSeperatedMailingListRegistered = string.Join(",", registeredMembersEmail);
             string commaSeperatedMailingListNewsLetter = string.Join(",", newsletterUsersEmail);
-
+            string htmlMail = System.IO.File.ReadAllText(_hostEnvironment.ContentRootPath + "/newsletterTemplate/template.html");
             NewsletterCombined newsletterList = new NewsletterCombined
             {
                 shgMembersEmail = shgMembersEmail,
@@ -52,7 +57,7 @@ namespace KalamYouthForumWebApp.Controllers
 
 
 
-
+            ViewBag.HTMLMail = htmlMail;
             return View(newsletterList);
         }
 
@@ -185,6 +190,41 @@ namespace KalamYouthForumWebApp.Controllers
             _context.newsletterLists.Remove(newsletterList);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public AuthMessageSenderOptions Options { get; }
+
+        [Authorize(Roles = "Admin, Moderator, ProjectAdmin")]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public async Task<IActionResult> SendEmail(string subject, string toList, string htmlContent )
+        {
+            AuthMessageSenderOptions authMessageSenderOptions = new();
+            var apiKey = authMessageSenderOptions.SendGridKey;
+            var user = authMessageSenderOptions.SendGridUser;
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress("kalamyouthforumdev@gmail.com", user);
+            var plainTextContent = "Please open the mail in a browser to view the full content.";
+            List<EmailAddress> tos = new List<EmailAddress>();
+            var toListElements = toList.Split(',').ToList();
+            foreach(var toId in toListElements)
+            { 
+                var toInstance = new EmailAddress(toId);
+                tos.Add(toInstance);
+            }
+            var msg = MailHelper.CreateSingleEmailToMultipleRecipients(from, tos, subject, plainTextContent, htmlContent);
+            var response = await client.SendEmailAsync(msg);
+            if (response.IsSuccessStatusCode)
+            {
+                ViewBag.Message = "Newsletter sent successfully";
+                ViewBag.Response = response.Body;
+                return View();
+            } else
+            {
+                ViewBag.Message = "Failed to sent the newsletter";
+                ViewBag.Response = response.Body;
+                return View();
+            }
         }
 
         private bool NewsletterListExists(int id)

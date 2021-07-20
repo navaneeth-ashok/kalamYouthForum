@@ -507,3 +507,5 @@ C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\bin\Debug\net5.0\SendGrid.
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\bin\Debug\net5.0\StarkbankEcdsa.dll
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\RegisterConfirmation.cshtml.g.cs
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\ConfirmEmail.cshtml.g.cs
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\NewsletterList\SendEmail.cshtml.g.cs
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\ChapterModels\AddExpenseReport.cshtml.g.cs

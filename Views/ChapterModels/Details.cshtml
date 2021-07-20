@@ -1,4 +1,4 @@
-﻿@model KalamYouthForumWebApp.Models.ViewModels.ChapterSHE
+﻿@model KalamYouthForumWebApp.Models.ViewModels.ChapterMonthlyAccount
 
 @{
     ViewData["Title"] = "Details";
@@ -11,47 +11,47 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Chapter.ChapterName)
+            @Html.DisplayNameFor(model => model.ChapterSHE.Chapter.ChapterName)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Chapter.ChapterName)
+            @Html.DisplayFor(model => model.ChapterSHE.Chapter.ChapterName)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Chapter.Panchayat)
+            @Html.DisplayNameFor(model => model.ChapterSHE.Chapter.Panchayat)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Chapter.Panchayat)
+            @Html.DisplayFor(model => model.ChapterSHE.Chapter.Panchayat)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Chapter.Muncipality)
+            @Html.DisplayNameFor(model => model.ChapterSHE.Chapter.Muncipality)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Chapter.Muncipality)
+            @Html.DisplayFor(model => model.ChapterSHE.Chapter.Muncipality)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Chapter.Taluk)
+            @Html.DisplayNameFor(model => model.ChapterSHE.Chapter.Taluk)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Chapter.Taluk)
+            @Html.DisplayFor(model => model.ChapterSHE.Chapter.Taluk)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Chapter.Constituency)
+            @Html.DisplayNameFor(model => model.ChapterSHE.Chapter.Constituency)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Chapter.Constituency)
+            @Html.DisplayFor(model => model.ChapterSHE.Chapter.Constituency)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Chapter.OfficeAddress)
+            @Html.DisplayNameFor(model => model.ChapterSHE.Chapter.OfficeAddress)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Chapter.OfficeAddress)
+            @Html.DisplayFor(model => model.ChapterSHE.Chapter.OfficeAddress)
         </dd>
     </dl>
 
 </div>
 <h3>Associated SHGs</h3>
 <form action="/SHE/Create" method="post">
-    <input type="hidden" name="chapterID" value="@Model.Chapter.ChapterID"/>
+    <input type="hidden" name="chapterID" value="@Model.ChapterSHE.Chapter.ChapterID"/>
     <input type="submit" value="Create new SHG" class="btn btn-primary" />
 </form>
 @*<a asp-action="Create" asp-controller="SHE" asp-route-id="@Model.Chapter.ChapterID" class="btn btn-primary">Create New SHE</a>*@
@@ -66,7 +66,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var she in Model.SHEModels)
+        @foreach (var she in Model.ChapterSHE.SHEModels)
         {
             <tr>
                 <td><a asp-action="Details" asp-controller="SHE" asp-route-id="@she.SHEId">@she.SHEName</a></td>
@@ -78,7 +78,66 @@
         }
     </tbody>
 </table>
+<div class="expense_upload">
+    <h4>Account Details and Monthly Expense Upload</h4>
+    <form asp-action="AddExpenseReport" asp-controller="ChapterModels" method="post" class="mb-3">
+        <input type="hidden" name="chapterID" value="@Model.ChapterSHE.Chapter.ChapterID" />
+        <input type="submit" class="btn btn-success" value="Add Report" />
+    </form>
+    <table class="table table-bordered table-hover mt-5" id="document-table">
+        <thead>
+            <tr>
+                <th>Report Date</th>
+                <th>Document</th>
+                <th>Description</th>
+                <th>Total Amount</th>
+                <th>Uploaded By</th>
+                <th>Date of Upload</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ foreach (var documents in Model.MonthlyAccountDocument)
+                {
+                    <tr>
+                        <td>@documents.DateOfAccount.ToShortDateString()</td>
+                        <td>@documents.Name</td>
+                        <td>@documents.Description</td>
+                        <td>@documents.TotalAmount</td>
+                        <td>@documents.UploadedBy</td>
+                        <td>@documents.DateOfUpload</td>
+                        @*<td><a asp-controller="Document" asp-action="Download" asp-route-id="@documents.Id">Download</a></td>*@
+                        <td>
+                            <div class="container">
+                                <div class="row">
+                                    <form asp-controller="Document" asp-action="Download">
+                                        <input type="hidden" name="id" value="@documents.Id" />
+                                        <input type="submit" name="submit" value="Download" class="btn btn-outline-secondary" />
+                                    </form>
+                                </div>
+                                <div class="row">
+                                    <form asp-controller="Document" asp-action="Delete">
+                                        <input type="hidden" name="id" value="@documents.Id" />
+                                        <input type="hidden" name="chapterID" value="@Model.ChapterSHE.Chapter.ChapterID" />
+                                        <input type="submit" name="submit" value="Delete" class="btn btn-outline-danger" />
+                                    </form>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <hr />
+</div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Chapter.ChapterID">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.ChapterSHE.Chapter.ChapterID">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#document-table').DataTable();
+    });
+</script>

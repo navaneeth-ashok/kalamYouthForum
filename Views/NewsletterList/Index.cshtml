@@ -3,15 +3,15 @@
 @{
     ViewData["Title"] = "EMail List";
 }
-
-<h1 style="color:#003742">Email List</h1>
+<link rel="stylesheet" href="~/assets/textEditor/jquery-te-1.4.0.css" />
+<h1 style="color:#003742">Newsletter</h1>
 
 <p>
     <a asp-action="Create" class="btn btn-outline-success">Add New Email to the list</a>
 </p>
 
 
-<div class="container email-list">
+<div class="container email-list card rounded shadow p-5 mb-5 bg-body rounded">
     <div class="container">
         <h2>Newsletter Subscribed Members Emails</h2>
         <table class="table table-borderless">
@@ -31,7 +31,7 @@
                 }
             </tbody>
         </table>
-        <input type="text" readonly class="w-100 text-break" value="@Model.commaSeperatedMailingListNewsLetter" id="news"/><button onclick="copyEmail('news')" class="btn btn-outline-secondary btn-sm mt-0">Copy</button>
+        <input type="text" readonly class="w-100 text-break" value="@Model.commaSeperatedMailingListNewsLetter" id="news" /><button onclick="copyEmail('news')" class="btn btn-outline-secondary btn-sm mt-0">Copy</button>
     </div>
     <div class="container mt-3">
         <hr />
@@ -40,7 +40,7 @@
         {
             <p><a href="mailto:@registeredMember">@registeredMember</a></p>
         }
-        <input type="text" readonly class="w-100 text-break" value="@Model.commaSeperatedMailingListRegistered" id="reg"/><button onclick="copyEmail('reg')" class="btn btn-outline-secondary btn-sm mt-0">Copy</button>
+        <input type="text" readonly class="w-100 text-break" value="@Model.commaSeperatedMailingListRegistered" id="reg" /><button onclick="copyEmail('reg')" class="btn btn-outline-secondary btn-sm mt-0">Copy</button>
     </div>
     <div class="container mt-3">
         <hr />
@@ -56,10 +56,29 @@
         <h3>Complete newsletter Email List</h3>
         <input type="text" readonly class="w-100 text-break" value="@Model.commaSeperatedMailingList" id="full" /><button onclick="copyEmail('full')" class="btn btn-outline-secondary btn-sm mt-0">Copy</button>
     </div>
-
-
+</div>
+<div class="container card rounded shadow p-5 mb-5 bg-body rounded">
+    <h2>Compose Email</h2>
+    <form asp-action="SendEmail" asp-controller="NewsletterList">
+        <div class="form-group m-3">
+            <label for="toList" class="control-label">To</label>
+            <input type="text" name="toList" id="toList" class="w-100 form-control" placeholder="Copy the email list from above or type yours seperated by comma" />
+        </div>
+        <div class="form-group m-3">
+            <label for="subject" class="control-label">Subject</label>
+            <input type="text" name="subject" id="subject" class="w-100 form-control" placeholder="Subject of the Newsletter" />
+        </div>
+        <div class="form-group m-3">
+            <label for="content" class="control-label">Content</label>
+            <textarea name="htmlContent" id="htmlContent" class="form-control" rows="10">
+                @ViewBag.HTMLMail
+            </textarea>
+        </div>
+        <input type="submit" name="submit" value="Send Mail" class="btn btn-primary" />
+    </form>
 </div>
 
+<script src="~/assets/textEditor/jquery-te-1.4.0.min.js"></script>
 <script>
     function copyEmail(id) {
         var copyText = document.getElementById(id);
@@ -67,4 +86,5 @@
         copyText.setSelectionRange(0, 99999); /* For mobile devices */
         document.execCommand("copy");
     }
+    $("#htmlContent").jqte();
 </script>

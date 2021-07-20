@@ -1,0 +1,33 @@
+﻿@model KalamYouthForumWebApp.Models.MonthlyAccountDocument
+
+@{
+    ViewData["Title"] = "Add Expense Report";
+    int chapterID = ViewBag.chapterID;
+}
+
+<h1>Add Expense Report</h1>
+
+<form method="post" asp-controller="Document" asp-action="UploadToDatabase" enctype="multipart/form-data">
+
+    <div class="form-group mt-4">
+        <input type="file" name="files" required />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.TotalAmount">Total Amount</label>
+        <input asp-for="@Model.TotalAmount" class="form-control" />
+        <span asp-validation-for="@Model.TotalAmount" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Description"></label>
+        <input asp-for="@Model.Description" class="form-control" />
+        <span asp-validation-for="@Model.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.DateOfAccount"></label>
+        <input asp-for="@Model.DateOfAccount" class="form-control" />
+        <span asp-validation-for="@Model.DateOfAccount" class="text-danger"></span>
+    </div>
+    <input type="hidden" name="chapterID" value="@chapterID" />
+    <button class="btn btn-success" type="submit">Upload Document</button>
+</form>
+

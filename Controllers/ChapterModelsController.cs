@@ -73,7 +73,25 @@ namespace KalamYouthForumWebApp.Controllers
                 return NotFound();
             }
 
-            return View(model);
+            List<int> IdsToSearch = new List<int>();
+            var documentIDs = _context.ChapterMonthlyDocument.Where(a => a.ChapterID == id).ToList();
+            foreach (var idEle in documentIDs)
+            {
+                IdsToSearch.Add(Convert.ToInt32(idEle.FileId));
+            }
+
+            IEnumerable<MonthlyAccountDocument> monthlyAccountDocuments = _context.MonthlyAccountDocuments.Where(r => IdsToSearch.Contains(r.Id)).ToList();
+
+
+
+            ChapterMonthlyAccount chapterMonthlyAccount = new ChapterMonthlyAccount
+            {
+                ChapterSHE = model,
+                MonthlyAccountDocument = monthlyAccountDocuments,
+            };
+
+
+            return View(chapterMonthlyAccount);
         }
 
         [Authorize(Roles = "Admin, Moderator, Chapter")]
@@ -208,6 +226,15 @@ namespace KalamYouthForumWebApp.Controllers
             _context.chapterModels.Remove(chapterModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        [Authorize(Roles = "Admin, Moderator, Chapter")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddExpenseReport(int chapterID)
+        {
+            ViewBag.chapterID = chapterID;
+            return View();
         }
 
         private bool ChapterModelExists(int id)

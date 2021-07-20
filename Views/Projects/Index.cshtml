@@ -16,6 +16,9 @@
                 @Html.DisplayNameFor(model => model.Heading)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.DateOfPublish)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Content)
             </th>
             <th>
@@ -29,6 +32,9 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Heading)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfPublish)
             </td>
             <td>
                 @Html.Raw(item.Content)
