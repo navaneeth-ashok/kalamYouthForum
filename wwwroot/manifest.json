@@ -1,0 +1,29 @@
+{
+  "name": "Kalam Youth Forum Blood Donor",
+  "short_name": "KYF Blood",
+  "description": "A blood donor app by Kalam Youth Forum",
+  "icons": [
+    {
+      "src": "icons/logo144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icons/logo168.png",
+      "sizes": "168x168",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "display": "standalone",
+  "start_url": "/BloodDonation"
+} 
