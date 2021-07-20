@@ -9,6 +9,7 @@ namespace KalamYouthForumWebApp.Models
     public class SHEModel
     {
         [Key]
+        [Display(Name = "SHG Id")]
         public int SHEId { get; set; }
 
         [Required]
