@@ -525,8 +525,16 @@ a.blood-donation__phone:hover{
     font-weight: bold;
 }
 
+.blood-form .btn-search.btn-reset {
+    background-color: #6b6b6b;
+}
+
+.blood-form .btn-search.btn-reset:hover {
+    background-color: #901111;
+}
+
 .blood-form .btn:hover {
-    background-color: #003844;
+    background-color: #056c1d;
 }
 
 .email-list .btn {

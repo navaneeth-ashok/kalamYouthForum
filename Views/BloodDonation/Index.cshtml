@@ -8,24 +8,33 @@
 <div class="registration-card blood-form mt-5">
     <h1 class="text-center" style="color:#003844">Blood Donors List</h1>
     <hr />
-    <form action="/BloodDonation/Index" method="get">
-        <div class="container">
+
+    <div class="container">
+        <form action="/BloodDonation/Index" method="get">
             <div class="row mb-3">
                 <div class="col form-floating">
-                    <input type="text" class="form-control" name="State" placeholder="State" value="@(ViewContext.RouteData.Values["State"])">
+                    <input type="text" class="form-control" name="State" placeholder="State" id="State" value="@(ViewContext.RouteData.Values["State"])">
                     <label for="floatingInput">State</label>
                 </div>
                 <div class="col form-floating">
-                    <input type="text" class="form-control" name="District" placeholder="District" value="@(ViewContext.RouteData.Values["District"])">
+                    <input type="text" class="form-control" name="District" placeholder="District" id="District" value="@(ViewContext.RouteData.Values["District"])">
                     <label for="floatingPassword">District</label>
+                </div>
+                <div class="col form-floating">
+                    <select name="BloodGroup" id="BloodGroup" asp-items="Html.GetEnumSelectList<KalamYouthForumWebApp.Models.BloodGroupList>()" class="form-control">
+                        <option>Any</option>
+                    </select>
+                    <label for="floatingGroup">Blood Group</label>
                 </div>
             </div>
             <div class="ms-auto me-auto text-center">
                 <button class="btn btn-search mb-3" type="submit">Search</button>
+                <button class="btn btn-search btn-reset mb-3" onclick="resetFilter()">Reset</button>
             </div>
-        </div>
+        </form>
+    </div>
 
-    </form>
+
     @if (Model.ToList().Count() > 0)
     {
         <table class="table table-borderless table-hover blood-donation-table">
@@ -47,7 +56,7 @@
                         @Html.Encode("Phone Number")
                     </th>
                     <th>
-                        @Html.Encode("Other Number")
+                        @Html.Encode("WhatsApp Number")
                     </th>
                     <th></th>
                 </tr>
@@ -86,12 +95,114 @@
             <p>Please search again with the state only for more results.</p>
         </div>
     }
+    <hr />
+    <div class="text-center w-50 ms-auto me-auto">
+        <h3>Contact Donors</h3>
+        <p>Please fill the form with your Name and Mobile number to Send a notification to all the registered donors listed above.</p>
+        <form asp-action="Notify" asp-controller="BloodDonation" onsubmit="return notifyValidation()">
+            <div class="row mb-3">
+                <div class="col form-floating">
+                    <input type="text" class="form-control" name="Name" placeholder="Name" id="Name">
+                    <label for="floatingInput">Name</label>
+                </div>
+                <div class="col form-floating">
+                    <input type="text" class="form-control" name="Phone" placeholder="Phone" id="Phone">
+                    <label for="floatingPassword">10 digit Phone Number</label>
+                </div>
+            </div>
+            <input type="hidden" name="State" value="@ViewBag.State" />
+            <input type="hidden" name="District" value="@ViewBag.District" />
+            <input type="hidden" name="BloodGroup" value="@ViewBag.BloodGroup" />
+            <div class="ms-auto me-auto text-center">
+                <button class="btn btn-outline-success mb-3" type="submit">Notify</button>
+            </div>
+            <p id="nameValidation" class="text-danger"></p>
+            <p id="numberValidation" class="text-danger"></p>
+            <p id="filterValidation" class="text-danger">@ViewBag.NotifyError</p>
+            <p id="notificationMessageS" class="text-success"></p>
+            <p id="notificationMessageF" class="text-danger"></p>
+        </form>
+    </div>
     <div class="donor-info text-center">
         <hr />
         <p>You can be a part of this initiative by registering here <p>
-        <a href="/Identity/Account/Register" class="btn btn-success" style="margin:0">Register</a>
+            <a href="/Identity/Account/Register" class="btn btn-success" style="margin:0">Register</a>
     </div>
 
 
 </div>
 
+<script>
+    window.onload = function () {
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        const params = Object.fromEntries(urlSearchParams.entries());
+        if (urlSearchParams.entries().next()['value'] != undefined) {
+            document.getElementById("State").value = params['State'];
+            document.getElementById("District").value = params['District'];
+            document.getElementById("BloodGroup").value = params['BloodGroup'];
+        }
+        //console.log(params);
+    }
+
+    function resetFilter() {
+        document.getElementById("District").value = "";
+        document.getElementById("State").value = "";
+        document.getElementById("BloodGroup").value = "Any";
+        location.reload();
+    }
+
+    function notifyValidation() {
+        const name = document.getElementById("Name").value;
+        const number = document.getElementById("Phone").value;
+        const state = document.getElementById("State").value;
+        const district = document.getElementById("District").value;
+        const bloodgroup = document.getElementById("BloodGroup").value;
+        document.getElementById("nameValidation").textContent = "";
+        document.getElementById("numberValidation").textContent = "";
+        document.getElementById("filterValidation").innerHTML = "";
+        var a = /^\d{10}$/;
+        if (name === null || name === "") {
+            document.getElementById("nameValidation").textContent = "Please enter a name before clicking Notify";
+            console.log("1");
+            return false;
+        } else if (number === null || number === "") {
+            document.getElementById("numberValidation").textContent = "Please enter a number before clicking Notify";
+            console.log("2");
+            return false;
+        } else if (!a.test(number)) {
+            document.getElementById("numberValidation").textContent = "Please enter a valid 10 digit phone number";
+            console.log("3");
+            return false;
+        } else if (state == "" || state == null || district == "" || district == null || bloodgroup == "Any") {
+            console.log(state);
+            console.log(district);
+            console.log(bloodgroup);
+            document.getElementById("filterValidation").innerHTML = "<p>Please select a State, District and a Blood Group.</p><p>Click on Search</p><p>Once the result is shown, fill this form</p>";
+            console.log("4");
+            return false;
+        } else {
+            console.log("5");
+            var data = {
+                State: state,
+                District: district,
+                BloodGroup: bloodgroup,
+                Name: name,
+                PhoneNumber: number
+            };
+            $.ajax({
+                url: '@Url.Action("Notify", "BloodDonation")',
+                type: "post",
+                data: data,
+                headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
+                success: function (result) {
+                    document.getElementById("notificationMessageS").innerText = "Successfully notified all the donors through SMS";
+                },
+                error: function (result) {
+                    document.getElementById("notificationMessageF").innerText = "Sorry, there was an error from our end, we are looking into it, please contact the donors manually.";
+                }
+            });
+            return false;
+        }
+    }
+
+</script>

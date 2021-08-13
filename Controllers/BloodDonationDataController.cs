@@ -32,30 +32,67 @@ namespace KalamYouthForumWebApp.Controllers
         /// <param name="District">District you are searching for</param>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<DonorDTO> FilterDonorList(string State = null, string District = null)
+        public IEnumerable<DonorDTO> FilterDonorList(string State = null, string District = null, string BloodGroup = null)
         {
             System.Diagnostics.Debug.WriteLine("Web API called");
             List<DonorDTO> donorDTOs = new List<DonorDTO>();
             List<SHGMember> donorList = new List<SHGMember>();
             var users = new List<ApplicationUser>();
-            if (State == null && District == null)
-            {
-                donorList = _context.shgMembers.ToList();
-                users = userManager.Users.ToList();
-            }
-            else if (State == null && District != null)
-            {
-                donorList = _context.shgMembers.Where(s => s.District.Contains(District)).ToList();
-                users = userManager.Users.Where(s => s.District.Contains(District)).ToList();
-            } else if (District == null && State != null)
-            {
-                donorList = _context.shgMembers.Where(s => s.State.Contains(State)).ToList();
-                users = userManager.Users.Where(s => s.State.Contains(State)).ToList();
-            } else
+            //if (State == null && District == null && BloodGroup == null)
+            //{
+            //    System.Diagnostics.Debug.WriteLine("State Null District Null Blood Null");
+            //    donorList = _context.shgMembers.ToList();
+            //    users = userManager.Users.ToList();
+            //}
+            //else if (State == null && District != null && BloodGroup == null)
+            //{
+            //    System.Diagnostics.Debug.WriteLine("State Null District Yes Blood Null");
+            //    donorList = _context.shgMembers.Where(s => s.District.Contains(District)).ToList();
+            //    users = userManager.Users.Where(s => s.District.Contains(District)).ToList();
+            //} else if (District == null && State != null && BloodGroup == null)
+            //{
+            //    System.Diagnostics.Debug.WriteLine("State Yes District Null Blood Null");
+            //    donorList = _context.shgMembers.Where(s => s.State.Contains(State)).ToList();
+            //    users = userManager.Users.Where(s => s.State.Contains(State)).ToList();
+            //}
+            //else if (State == null && District == null && BloodGroup != null)
+            //{
+            //    System.Diagnostics.Debug.WriteLine("State Null District Null Blood Yes");
+            //    BloodGroupList bloodGroup = (BloodGroupList)Convert.ToInt32(BloodGroup);
+            //    donorList = _context.shgMembers.Where(s => s.BloodGroup.ToString().Contains(bloodGroup.ToString())).ToList();
+            //    users = userManager.Users.Where(s => s.BloodGroup.ToString().Contains(BloodGroup)).ToList();
+            //}
+            //else if (State == null && District != null && BloodGroup != null)
+            //{
+            //    System.Diagnostics.Debug.WriteLine("State Null District Yes Blood Yes");
+            //    donorList = _context.shgMembers.Where(s => s.District.Contains(District)).ToList();
+            //    users = userManager.Users.Where(s => s.District.Contains(District)).ToList();
+            //}
+            //else if (District == null && State != null && BloodGroup != null)
+            //{
+            //    System.Diagnostics.Debug.WriteLine("State Yes District Null Blood Yes");
+            //    donorList = _context.shgMembers.Where(s => s.State.Contains(State)).ToList();
+            //    users = userManager.Users.Where(s => s.State.Contains(State)).ToList();
+            //}
+
+            //else
+            //{
+            
+            if(BloodGroup == null || BloodGroup == "" || BloodGroup == "Any")
             {
                 donorList = _context.shgMembers.Where(p => p.State.Contains(State)).Where(s => s.District.Contains(District)).ToList();
                 users = userManager.Users.Where(s => s.State.Contains(State)).Where(s => s.District.Contains(District)).ToList();
+            } else
+            {
+                BloodGroupList bloodGroup = (BloodGroupList)Convert.ToInt32(BloodGroup);
+                System.Diagnostics.Debug.WriteLine("#######################");
+                System.Diagnostics.Debug.WriteLine(bloodGroup.ToString());
+                System.Diagnostics.Debug.WriteLine("#######################");
+                donorList = _context.shgMembers.Where(p => p.State.Contains(State)).Where(s => s.District.Contains(District)).Where(t => ((string)(object)t.BloodGroup) == BloodGroup).ToList();
+                users = userManager.Users.Where(s => s.State.Contains(State)).Where(s => s.District.Contains(District)).Where(t => ((string)(object)t.BloodGroup) == BloodGroup).ToList();
             }
+                
+            //}
 
             foreach (var donor in donorList)
             {

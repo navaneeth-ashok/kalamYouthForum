@@ -500,7 +500,6 @@ C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Vie
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\Home\Registration.cshtml.g.cs
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\BloodDonation\Index.cshtml.g.cs
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\EnableAuthenticator.cshtml.g.cs
-C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\KalamYouthForumWebApp.csprojAssemblyReference.cache
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\DocumentUpload\Index.cshtml.g.cs
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\Razor\Views\SHE\AddExpenseReport.cshtml.g.cs
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\bin\Debug\net5.0\SendGrid.dll
@@ -515,3 +514,4 @@ C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\bin\Debug\net5.0\NWebsec.A
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\bin\Debug\net5.0\NWebsec.AspNetCore.Mvc.dll
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\bin\Debug\net5.0\NWebsec.AspNetCore.Mvc.TagHelpers.dll
 C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\bin\Debug\net5.0\WebEssentials.AspNetCore.Pwa.dll
+C:\Users\navaneeth\source\repos\KalamYouthForumWebApp\obj\Debug\net5.0\KalamYouthForumWebApp.csprojAssemblyReference.cache
