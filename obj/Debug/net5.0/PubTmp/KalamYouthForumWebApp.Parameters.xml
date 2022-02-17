@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-  <parameter name="IIS Web Application Name" description="" value="KalamYouthForumWebApp" tags="IisApp">
-    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\navaneeth\\source\\repos\\KalamYouthForumWebApp\\obj\\Debug\\net5\.0\\PubTmp\\Out\\$" />
-  </parameter>
-  <parameter name="KalamYouthForumWebApp.Data.ApplicationDbContext" description="" value="Data Source=tcp:kalamyouthforumwebappdbserver.database.windows.net,1433;Initial Catalog=aspnet-KalamYouthForumWebApp;User Id=navaneeth@kalamyouthforumwebappdbserver;Password=F!@$hB@t4" tags="dbfullsql">
-    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^C:\\Users\\navaneeth\\source\\repos\\KalamYouthForumWebApp\\obj\\Debug\\net5\.0\\PubTmp\\EFSQLScripts\\KalamYouthForumWebApp\.Data\.ApplicationDbContext\.sql$" />
-  </parameter>
-</parameters>
