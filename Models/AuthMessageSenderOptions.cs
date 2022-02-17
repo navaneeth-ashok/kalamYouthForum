@@ -10,7 +10,7 @@ namespace KalamYouthForumWebApp.Models
     public class AuthMessageSenderOptions
     {
         public string SendGridUser = "Kalam Youth Forum";
-        public string SendGridKey = "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";
+        public string SendGridKey = "<receive_key_from_env>";
     }
 
     
